@@ -1,0 +1,5 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/customer_sun_occluder.gd" id="script"]
+[node name="SunOccluder" type="LightOccluder2D"]
+occluder_light_mask = 2
+script = ExtResource("script")

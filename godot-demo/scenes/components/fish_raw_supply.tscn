@@ -1,0 +1,61 @@
+[gd_scene format=3]
+[ext_resource type="Material" path="res://ui/sun_backlight.tres" id="sun_backlight"]
+
+
+[ext_resource type="Texture2D" uid="uid://c0p8hx1o5cqab" path="res://assets/upgrade-foods.png" id="foods"]
+[ext_resource type="FontFile" uid="uid://g12wugvwtk8a" path="res://assets/fonts/Iansui-Regular.ttf" id="label_font"]
+[ext_resource type="PackedScene" path="res://scenes/components/equipment_label_frame.tscn" id="plaque"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="theme"]
+[sub_resource type="AtlasTexture" id="Food3"]
+atlas = ExtResource("foods")
+region = Rect2(1420, 120, 310, 310)
+filter_clip = true
+
+[node name="Raw" type="Control" unique_id=441831968]
+anchors_preset = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 85.0
+offset_bottom = 75.0
+mouse_filter = 2
+
+theme = ExtResource("theme")
+metadata/_edit_group_ = true
+
+[node name="Art" type="TextureRect" parent="." unique_id=281468947]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 25.0
+offset_top = 7.0
+offset_right = 64.0
+offset_bottom = 36.0
+mouse_filter = 2
+texture = SubResource("Food3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Status" type="Label" parent="." unique_id=1427081228]
+layout_mode = 0
+offset_top = 46.0
+offset_right = 85.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.06, 1)
+theme_override_fonts/font = ExtResource("label_font")
+theme_override_font_sizes/font_size = 16
+text = "生魚蛋 12"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Status" unique_id=1609499223 instance=ExtResource("plaque")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 85.0
+offset_bottom = 32.0
+metadata/_edit_lock_ = true
+

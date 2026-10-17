@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://bfmrfescmi357"]
+[ext_resource type="Material" path="res://ui/sun_backlight.tres" id="sun_backlight"]
+
+
+[ext_resource type="Shader" uid="uid://xxj3tlkr1sm7" path="res://scripts/contact_shadow.gdshader" id="4_v1i18"]
+[ext_resource type="PackedScene" uid="uid://bw2vadd0xd788" path="res://scenes/components/contact_shadow.tscn" id="contact_shadow"]
+[ext_resource type="Texture2D" uid="uid://c0p8hx1o5cqab" path="res://assets/upgrade-foods.png" id="foods"]
+[ext_resource type="FontFile" uid="uid://g12wugvwtk8a" path="res://assets/fonts/Iansui-Regular.ttf" id="label_font"]
+[ext_resource type="PackedScene" path="res://scenes/components/equipment_label_frame.tscn" id="plaque"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="theme"]
+
+[sub_resource type="AtlasTexture" id="Food2"]
+atlas = ExtResource("foods")
+region = Rect2(890, 60, 452, 400)
+filter_clip = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x57qb"]
+resource_local_to_scene = true
+shader = ExtResource("4_v1i18")
+shader_parameter/shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 1)
+shader_parameter/contact_center = Vector2(0.5, 0.84)
+shader_parameter/contact_radius = Vector2(0.28, 0.17)
+shader_parameter/lift = 0.0
+
+[sub_resource type="AtlasTexture" id="Food1"]
+atlas = ExtResource("foods")
+region = Rect2(510, 105, 315, 330)
+filter_clip = true
+
+[node name="Siumai" type="Control" unique_id=1349663394]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 260.0
+offset_bottom = 90.0
+mouse_filter = 2
+theme = ExtResource("theme")
+metadata/_edit_group_ = true
+
+[node name="Basket" type="TextureRect" parent="." unique_id=1639253352]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 20.0
+offset_top = -15.0
+offset_right = 240.0
+offset_bottom = 75.0
+mouse_filter = 2
+texture = SubResource("Food2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContactShadow" parent="Basket" unique_id=1341468373 instance=ExtResource("contact_shadow")]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_x57qb")
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 102.0
+target_visual = NodePath("..")
+contact_center = Vector2(0.5, 0.84)
+contact_radius = Vector2(0.28, 0.17)
+
+[node name="Item0" type="TextureRect" parent="." unique_id=782874723]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 84.0
+offset_top = -19.0
+offset_right = 122.0
+offset_bottom = 15.0
+mouse_filter = 2
+texture = SubResource("Food1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Item1" type="TextureRect" parent="." unique_id=1654318907]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 109.0
+offset_top = -25.0
+offset_right = 147.0
+offset_bottom = 9.0
+mouse_filter = 2
+texture = SubResource("Food1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Item2" type="TextureRect" parent="." unique_id=640517343]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 136.0
+offset_top = -19.0
+offset_right = 174.0
+offset_bottom = 15.0
+mouse_filter = 2
+texture = SubResource("Food1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Item3" type="TextureRect" parent="." unique_id=645748686]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 87.0
+offset_top = -7.0
+offset_right = 125.0
+offset_bottom = 27.0
+mouse_filter = 2
+texture = SubResource("Food1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Item4" type="TextureRect" parent="." unique_id=68225890]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 109.0
+offset_top = -1.0
+offset_right = 147.0
+offset_bottom = 33.0
+mouse_filter = 2
+texture = SubResource("Food1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Item5" type="TextureRect" parent="." unique_id=830649444]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 133.0
+offset_top = -4.0
+offset_right = 171.0
+offset_bottom = 30.0
+mouse_filter = 2
+texture = SubResource("Food1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Status" type="Label" parent="." unique_id=1082197565]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 57.0
+offset_right = 281.0
+offset_bottom = 85.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.06, 1)
+theme_override_fonts/font = ExtResource("label_font")
+theme_override_font_sizes/font_size = 16
+text = "燒賣 6 / 6"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Status" unique_id=1589003468 instance=ExtResource("plaque")]
+layout_mode = 0
+anchors_preset = 0

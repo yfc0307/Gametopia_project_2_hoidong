@@ -1,0 +1,340 @@
+[gd_scene format=3 uid="uid://ch55sxjf2xw8"]
+[ext_resource type="PackedScene" path="res://scenes/components/customer_sun_occluder.tscn" id="sun_occluder"]
+
+[ext_resource type="Material" path="res://ui/sun_backlight.tres" id="sun_backlight"]
+
+
+[ext_resource type="Texture2D" path="res://assets/upgrade-foods.png" id="foods"]
+
+[ext_resource type="Script" path="res://scripts/customer_motion.gd" id="motion"]
+[ext_resource type="Texture2D" path="res://assets/customers/granny.png" id="portrait"]
+[ext_resource type="Texture2D" path="res://assets/props-sketch.png" id="sprites"]
+[ext_resource type="Texture2D" path="res://assets/tea-bowl-sketch.png" id="tea_icon"]
+[ext_resource type="Theme" path="res://ui/theme.tres" id="theme"]
+
+[sub_resource type="StyleBoxFlat" id="Bubble"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.966, 0.87, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.43, 0.32, 0.8)
+corner_radius_top_left = 24
+corner_radius_top_right = 20
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 22
+shadow_color = Color(0.15, 0.12, 0.07, 0.15)
+shadow_size = 3
+
+[sub_resource type="AtlasTexture" id="EggImage"]
+atlas = ExtResource("sprites")
+region = Rect2(927, 157, 225, 274)
+filter_clip = true
+
+[sub_resource type="StyleBoxFlat" id="PatienceTrack"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.24, 0.22, 0.15, 0.85)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="StyleBoxFlat" id="PatienceFill"]
+bg_color = Color(0.45, 0.65, 0.43, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Highlight"]
+bg_color = Color(0.7, 0.8, 0.4, 0.08)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.82, 0.73, 0.34, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+
+[sub_resource type="AtlasTexture" id="Extra0"]
+atlas = ExtResource("foods")
+region = Rect2(55, 15, 365, 425)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Extra1"]
+atlas = ExtResource("foods")
+region = Rect2(510, 105, 315, 330)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Extra7"]
+atlas = ExtResource("foods")
+region = Rect2(1318, 452, 425, 400)
+filter_clip = true
+[node name="customer_order" type="Control" unique_id=9743991]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 250.0
+offset_bottom = 242.0
+mouse_filter = 2
+theme = ExtResource("theme")
+script = ExtResource("motion")
+metadata/_edit_group_ = true
+
+[node name="Avatar" type="TextureRect" parent="." unique_id=1221983893]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_top = 65.0
+offset_right = 151.0
+offset_bottom = 264.0
+mouse_filter = 2
+texture = ExtResource("portrait")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="OrderCard" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 66.0
+offset_right = 229.0
+offset_bottom = 232.0
+mouse_filter = 2
+theme_override_constants/separation = 7
+
+[node name="Bubble" type="PanelContainer" parent="OrderCard"]
+layout_mode = 2
+mouse_filter = 2
+custom_minimum_size = Vector2(88, 0)
+theme_override_styles/panel = SubResource("Bubble")
+
+[node name="Items" type="VBoxContainer" parent="OrderCard/Bubble"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="TeaRow" type="VBoxContainer" parent="OrderCard/Bubble/Items"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="Tea" type="Label" parent="OrderCard/Bubble/Items/TeaRow"]
+layout_mode = 2
+mouse_filter = 2
+text = "廿四味"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+
+[node name="TeaIcon" type="TextureRect" parent="OrderCard/Bubble/Items/TeaRow"]
+layout_mode = 2
+mouse_filter = 2
+custom_minimum_size = Vector2(64, 34)
+texture = ExtResource("tea_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EggRow" type="HBoxContainer" parent="OrderCard/Bubble/Items"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+theme_override_constants/separation = 1
+
+[node name="EggIcon0" type="TextureRect" parent="OrderCard/Bubble/Items/EggRow"]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 2
+mouse_filter = 2
+custom_minimum_size = Vector2(24, 34)
+texture = SubResource("EggImage")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EggIcon1" type="TextureRect" parent="OrderCard/Bubble/Items/EggRow"]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 2
+mouse_filter = 2
+custom_minimum_size = Vector2(24, 34)
+texture = SubResource("EggImage")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EggIcon2" type="TextureRect" parent="OrderCard/Bubble/Items/EggRow"]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 2
+mouse_filter = 2
+custom_minimum_size = Vector2(24, 34)
+texture = SubResource("EggImage")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PatienceColumn" type="VBoxContainer" parent="OrderCard"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="Heart" type="Label" parent="OrderCard/PatienceColumn"]
+layout_mode = 2
+mouse_filter = 2
+text = "♥"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.71, 0.3, 0.22, 1)
+
+[node name="Progress" type="ProgressBar" parent="OrderCard/PatienceColumn"]
+layout_mode = 2
+mouse_filter = 2
+custom_minimum_size = Vector2(14, 24)
+size_flags_horizontal = 4
+size_flags_vertical = 3
+fill_mode = 3
+show_percentage = false
+value = 100.0
+theme_override_styles/background = SubResource("PatienceTrack")
+theme_override_styles/fill = SubResource("PatienceFill")
+
+[node name="Patience" type="Label" parent="OrderCard/PatienceColumn"]
+layout_mode = 2
+mouse_filter = 2
+text = "60s"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(1, 0.97, 0.86, 1)
+theme_override_colors/font_outline_color = Color(0.22, 0.17, 0.1, 1)
+theme_override_constants/outline_size = 3
+
+[node name="Tail" type="Polygon2D" parent="OrderCard/Bubble"]
+position = Vector2(0, 45)
+polygon = PackedVector2Array(2, -9, -12, 6, 2, 14)
+color = Color(1, 0.966, 0.87, 0.94)
+
+[node name="Waiting" type="Label" parent="." unique_id=1124561585]
+visible = false
+layout_mode = 0
+offset_top = 165.0
+offset_right = 230.0
+offset_bottom = 195.0
+theme_override_font_sizes/font_size = 16
+text = "下一位街坊就到"
+horizontal_alignment = 1
+
+[node name="Highlight" type="Panel" parent="." unique_id=250903561]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_top = 20.0
+offset_right = 250.0
+offset_bottom = 242.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Highlight")
+
+[node name="JellyRow" type="VBoxContainer" parent="OrderCard/Bubble/Items"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+layout_mode = 2
+visible = false
+
+[node name="Icon" type="TextureRect" parent="OrderCard/Bubble/Items/JellyRow"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+layout_mode = 2
+custom_minimum_size = Vector2(64,48)
+texture = SubResource("Extra0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SiumaiRow" type="HBoxContainer" parent="OrderCard/Bubble/Items"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+layout_mode = 2
+visible = false
+alignment = 1
+
+[node name="Icon0" type="TextureRect" parent="OrderCard/Bubble/Items/SiumaiRow"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+layout_mode = 2
+custom_minimum_size = Vector2(24,28)
+texture = SubResource("Extra1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Icon1" type="TextureRect" parent="OrderCard/Bubble/Items/SiumaiRow"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+layout_mode = 2
+custom_minimum_size = Vector2(24,28)
+texture = SubResource("Extra1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Icon2" type="TextureRect" parent="OrderCard/Bubble/Items/SiumaiRow"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+layout_mode = 2
+custom_minimum_size = Vector2(24,28)
+texture = SubResource("Extra1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FishRow" type="VBoxContainer" parent="OrderCard/Bubble/Items"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+layout_mode = 2
+visible = false
+
+[node name="Flavour" type="Label" parent="OrderCard/Bubble/Items/FishRow"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+layout_mode = 2
+text = "原味"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+
+[node name="Icon" type="TextureRect" parent="OrderCard/Bubble/Items/FishRow"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+layout_mode = 2
+custom_minimum_size = Vector2(64,42)
+texture = SubResource("Extra7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SunOccluder" parent="Avatar" instance=ExtResource("sun_occluder")]

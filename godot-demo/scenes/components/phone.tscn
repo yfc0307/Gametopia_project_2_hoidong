@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://barqvui4vhgqi"]
+
+
+[ext_resource type="Texture2D" path="res://assets/props-sketch.png" id="3"]
+
+
+[ext_resource type="PackedScene" path="res://scenes/components/equipment_label_frame.tscn" id="label_frame"]
+
+
+[ext_resource type="Theme" path="res://ui/theme.tres" id="shared_theme"]
+
+
+[ext_resource type="FontFile" path="res://assets/fonts/Iansui-Regular.ttf" id="world_font"]
+
+
+[sub_resource type="AtlasTexture" id="Prop6"]
+atlas = ExtResource("3")
+region = Rect2(927, 460, 254, 459)
+filter_clip = true
+
+[sub_resource type="StyleBoxFlat" id="Highlight"]
+bg_color = Color(0.7, 0.8, 0.4, 0.12)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68, 0.72, 0.3, 1)
+
+[node name="phone" type="Control" unique_id=1827214109]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 104.0
+offset_bottom = 146.0
+mouse_filter = 2
+theme = ExtResource("shared_theme")
+
+
+metadata/_edit_group_ = true
+editor_description = "整體位置用 Position，整體大小用 Scale（X、Y 相同保持比例）。Design 內修改圖片與標籤。"
+scale = Vector2(1, 1)
+rotation = 0.0
+pivot_offset = Vector2(0, 0)
+
+[node name="Design" type="Control" parent="."]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 104.0
+offset_bottom = 146.0
+mouse_filter = 2
+scale = Vector2(1, 1)
+rotation = 0.0
+pivot_offset = Vector2(0, 0)
+
+[node name="Art" type="TextureRect" parent="Design" unique_id=1138050555]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 104.0
+offset_bottom = 110.0
+mouse_filter = 2
+texture = SubResource("Prop6")
+expand_mode = 1
+stretch_mode = 5
+scale = Vector2(1, 1)
+rotation = 0.0
+pivot_offset = Vector2(0, 0)
+
+[node name="Status" type="Label" parent="Design" unique_id=592446644]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 114.0
+offset_right = 104.0
+offset_bottom = 146.0
+theme_override_colors/font_color = Color(0.15, 0.08, 0.03, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.08, 0.03, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("world_font")
+theme_override_font_sizes/font_size = 16
+text = "電話補貨 "
+horizontal_alignment = 1
+vertical_alignment = 1
+scale = Vector2(1, 1)
+rotation = 0.0
+pivot_offset = Vector2(0, 0)
+clip_text = true
+
+[node name="Frame" parent="Design/Status" unique_id=2033071225 instance=ExtResource("label_frame")]
+metadata/_edit_lock_ = true
+
+[node name="Highlight" type="Panel" parent="Design" unique_id=1375426545]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 104.0
+offset_bottom = 146.0
+visible = false
+z_index = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Highlight")
+scale = Vector2(1, 1)
+rotation = 0.0
+pivot_offset = Vector2(0, 0)

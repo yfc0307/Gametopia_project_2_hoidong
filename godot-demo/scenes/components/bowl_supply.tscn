@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://qo76xfwdftv7"]
+[ext_resource type="Material" path="res://ui/sun_backlight.tres" id="sun_backlight"]
+
+[ext_resource type="PackedScene" path="res://scenes/components/contact_shadow.tscn" id="contact_shadow"]
+
+
+[ext_resource type="PackedScene" path="res://scenes/components/equipment_label_frame.tscn" id="label_frame"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="shared_theme"]
+[ext_resource type="Texture2D" uid="uid://dcx2mhxoq7xco" path="res://assets/bowl-stack-sketch.png" id="visual_new"]
+[ext_resource type="FontFile" uid="uid://g12wugvwtk8a" path="res://assets/fonts/Iansui-Regular.ttf" id="world_font"]
+
+[sub_resource type="StyleBoxFlat" id="Highlight"]
+bg_color = Color(0.7, 0.8, 0.4, 0.12)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68, 0.72, 0.3, 1)
+
+[node name="bowl_supply" type="Control" unique_id=12203920]
+editor_description = "整體位置用 Position，整體大小用 Scale（X、Y 相同保持比例）。Design 內修改圖片與標籤。"
+layout_mode = 3
+anchors_preset = 0
+offset_right = 110.0
+offset_bottom = 132.0
+mouse_filter = 2
+theme = ExtResource("shared_theme")
+metadata/_edit_group_ = true
+
+[node name="Design" type="Control" parent="." unique_id=881014171]
+anchors_preset = 0
+offset_right = 110.0
+offset_bottom = 132.0
+mouse_filter = 2
+
+[node name="ContactShadow" parent="Design" instance=ExtResource("contact_shadow")]
+
+[node name="Art" type="TextureRect" parent="Design" unique_id=396075726]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_right = 110.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("visual_new")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Status" type="Label" parent="Design" unique_id=1279629370]
+layout_mode = 0
+offset_left = 14.000002
+offset_top = 87.00001
+offset_right = 124.0
+offset_bottom = 119.00001
+scale = Vector2(0.74, 0.74)
+theme_override_colors/font_color = Color(0.15, 0.08, 0.03, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.08, 0.03, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("world_font")
+theme_override_font_sizes/font_size = 18
+text = "陶瓷碗 ∞"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Design/Status" unique_id=1003227154 instance=ExtResource("label_frame")]
+metadata/_edit_lock_ = true
+
+[node name="Highlight" type="Panel" parent="Design" unique_id=194651599]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_right = 110.0
+offset_bottom = 132.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Highlight")

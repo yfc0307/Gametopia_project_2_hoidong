@@ -1,0 +1,521 @@
+[gd_scene format=3 uid="uid://cnpwuc450niyn"]
+
+[ext_resource type="Texture2D" uid="uid://c0p8hx1o5cqab" path="res://assets/upgrade-foods.png" id="foods"]
+[ext_resource type="FontFile" uid="uid://g12wugvwtk8a" path="res://assets/fonts/Iansui-Regular.ttf" id="label_font"]
+[ext_resource type="PackedScene" path="res://scenes/components/equipment_label_frame.tscn" id="plaque"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="theme"]
+[ext_resource type="Texture2D" uid="uid://yek75gyhgdrq" path="res://assets/fish-warmer-watercolor.png" id="warmer_art"]
+
+[sub_resource type="AtlasTexture" id="Food5"]
+atlas = ExtResource("foods")
+region = Rect2(490, 505, 320, 315)
+filter_clip = true
+
+[sub_resource type="StyleBoxFlat" id="DropHighlight"]
+bg_color = Color(0.7, 0.8, 0.4, 0.08)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.82, 0.73, 0.34, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="AtlasTexture" id="Food4"]
+atlas = ExtResource("foods")
+region = Rect2(55, 505, 315, 315)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Food3"]
+atlas = ExtResource("foods")
+region = Rect2(1420, 120, 310, 310)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Food6"]
+atlas = ExtResource("foods")
+region = Rect2(890, 465, 445, 365)
+filter_clip = true
+
+[node name="Fish" type="Control" unique_id=1322160713]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 230.0
+mouse_filter = 2
+theme = ExtResource("theme")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="WarmerArt" type="TextureRect" parent="." unique_id=324668123]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -12.0
+offset_right = 285.0
+offset_bottom = 102.0
+mouse_filter = 2
+texture = ExtResource("warmer_art")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Lane0" type="Control" parent="." unique_id=1207926307]
+anchors_preset = 0
+offset_left = 14.0
+offset_top = -9.0
+offset_right = 149.0
+offset_bottom = 116.0
+mouse_filter = 2
+
+[node name="Name" type="Label" parent="Lane0" unique_id=245852075]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -7.0
+offset_right = 133.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("label_font")
+theme_override_font_sizes/font_size = 16
+text = "原味"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="Ball0" type="TextureRect" parent="Lane0" unique_id=2074713758]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 30.0
+offset_right = 54.0
+offset_bottom = 57.0
+scale = Vector2(0.91, 0.91)
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball1" type="TextureRect" parent="Lane0" unique_id=1735646150]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 29.0
+offset_right = 82.0
+offset_bottom = 56.0
+scale = Vector2(0.91, 0.91)
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball2" type="TextureRect" parent="Lane0" unique_id=1204162454]
+layout_mode = 0
+offset_left = 83.00001
+offset_top = 29.0
+offset_right = 110.00001
+offset_bottom = 56.0
+scale = Vector2(0.91, 0.91)
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball3" type="TextureRect" parent="Lane0" unique_id=1303072718]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 56.0
+offset_right = 39.0
+offset_bottom = 83.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball4" type="TextureRect" parent="Lane0" unique_id=920329964]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 57.0
+offset_right = 73.0
+offset_bottom = 84.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball5" type="TextureRect" parent="Lane0" unique_id=492355594]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 57.0
+offset_right = 109.0
+offset_bottom = 84.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Count" type="Label" parent="Lane0" unique_id=2104835222]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 135.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.06, 1)
+theme_override_font_sizes/font_size = 16
+text = "0 / 6"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Lane0/Count" unique_id=1280910568 instance=ExtResource("plaque")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 29.0
+offset_top = -1.0
+offset_right = 111.0
+offset_bottom = 31.0
+metadata/_edit_lock_ = true
+
+[node name="Highlight" type="Panel" parent="Lane0" unique_id=855215016]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("DropHighlight")
+
+[node name="Lane1" type="Control" parent="." unique_id=652063389]
+anchors_preset = 0
+offset_left = 136.0
+offset_top = -9.0
+offset_right = 271.0
+offset_bottom = 116.0
+mouse_filter = 2
+
+[node name="Name" type="Label" parent="Lane1" unique_id=86970266]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -6.0
+offset_right = 132.0
+offset_bottom = 18.0
+theme_override_fonts/font = ExtResource("label_font")
+theme_override_font_sizes/font_size = 16
+text = "咖喱"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="Ball0" type="TextureRect" parent="Lane1" unique_id=2129920734]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 34.0
+offset_right = 49.0
+offset_bottom = 61.0
+scale = Vector2(0.91, 0.91)
+mouse_filter = 2
+texture = SubResource("Food4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball1" type="TextureRect" parent="Lane1" unique_id=2053224300]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 34.0
+offset_right = 77.0
+offset_bottom = 61.0
+scale = Vector2(0.91, 0.91)
+mouse_filter = 2
+texture = SubResource("Food4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball2" type="TextureRect" parent="Lane1" unique_id=286276083]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 34.0
+offset_right = 103.0
+offset_bottom = 61.0
+scale = Vector2(0.91, 0.91)
+mouse_filter = 2
+texture = SubResource("Food4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball3" type="TextureRect" parent="Lane1" unique_id=992684600]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 57.0
+offset_right = 47.0
+offset_bottom = 84.0
+mouse_filter = 2
+texture = SubResource("Food4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball4" type="TextureRect" parent="Lane1" unique_id=1708230033]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 57.0
+offset_right = 80.0
+offset_bottom = 84.0
+mouse_filter = 2
+texture = SubResource("Food4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball5" type="TextureRect" parent="Lane1" unique_id=574263623]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 57.0
+offset_right = 113.0
+offset_bottom = 84.0
+mouse_filter = 2
+texture = SubResource("Food4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Count" type="Label" parent="Lane1" unique_id=1610682024]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 135.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.06, 1)
+theme_override_font_sizes/font_size = 16
+text = "0 / 6"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Lane1/Count" unique_id=1105362203 instance=ExtResource("plaque")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 24.0
+offset_top = 0.0
+offset_right = 108.0
+offset_bottom = 28.0
+metadata/_edit_lock_ = true
+
+[node name="Highlight" type="Panel" parent="Lane1" unique_id=1149477605]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("DropHighlight")
+
+[node name="Raw" type="Control" parent="." unique_id=441831968]
+anchors_preset = 0
+offset_left = 184.0
+offset_top = -104.0
+offset_right = 269.0
+offset_bottom = -29.0
+mouse_filter = 2
+
+[node name="Art" type="TextureRect" parent="Raw" unique_id=281468947]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 7.0
+offset_right = 64.0
+offset_bottom = 36.0
+mouse_filter = 2
+texture = SubResource("Food3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Status" type="Label" parent="Raw" unique_id=1427081228]
+layout_mode = 0
+offset_top = 46.0
+offset_right = 85.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.06, 1)
+theme_override_fonts/font = ExtResource("label_font")
+theme_override_font_sizes/font_size = 16
+text = "生魚蛋 12"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Raw/Status" unique_id=1609499223 instance=ExtResource("plaque")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 85.0
+offset_bottom = 32.0
+metadata/_edit_lock_ = true
+
+[node name="Sticks" type="Control" parent="." unique_id=2025480923]
+anchors_preset = 0
+offset_left = 16.0
+offset_top = -104.0
+offset_right = 86.0
+offset_bottom = -29.0
+mouse_filter = 2
+
+[node name="Art" type="TextureRect" parent="Sticks" unique_id=1274282792]
+layout_mode = 0
+offset_right = 70.0
+offset_bottom = 45.0
+mouse_filter = 2
+texture = SubResource("Food6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Status" type="Label" parent="Sticks" unique_id=316514379]
+layout_mode = 0
+offset_top = 46.0
+offset_right = 70.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.06, 1)
+theme_override_fonts/font = ExtResource("label_font")
+theme_override_font_sizes/font_size = 16
+text = "竹籤 ∞"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Sticks/Status" unique_id=1971983298 instance=ExtResource("plaque")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 69.0
+offset_bottom = 31.0
+metadata/_edit_lock_ = true
+
+[node name="Assembly" type="Control" parent="." unique_id=1144489802]
+anchors_preset = 0
+offset_left = 80.0
+offset_top = -107.0
+offset_right = 195.0
+offset_bottom = -27.0
+mouse_filter = 2
+
+[node name="Skewer" type="TextureRect" parent="Assembly" unique_id=488024026]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 105.0
+offset_bottom = 48.0
+mouse_filter = 2
+texture = SubResource("Food6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball0" type="TextureRect" parent="Assembly" unique_id=1409070568]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 19.0
+offset_right = 57.0
+offset_bottom = 43.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball1" type="TextureRect" parent="Assembly" unique_id=529678133]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 5.0
+offset_right = 75.0
+offset_bottom = 29.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball2" type="TextureRect" parent="Assembly" unique_id=1723279196]
+layout_mode = 0
+offset_left = 69.0
+offset_top = -8.0
+offset_right = 93.0
+offset_bottom = 16.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Status" type="Label" parent="Assembly" unique_id=1336614966]
+layout_mode = 0
+offset_top = 50.0
+offset_right = 115.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.06, 1)
+theme_override_fonts/font = ExtResource("label_font")
+theme_override_font_sizes/font_size = 16
+text = "裝填位"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Assembly/Status" unique_id=499666889 instance=ExtResource("plaque")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 19.0
+offset_top = 0.0
+offset_right = 94.0
+offset_bottom = 31.0
+metadata/_edit_lock_ = true
+
+[node name="Highlight" type="Panel" parent="Assembly" unique_id=106674251]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("DropHighlight")
+
+[node name="FlyingSkewer" type="TextureRect" parent="." unique_id=748845890]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_top = 137.0
+offset_right = 180.0
+offset_bottom = 187.0
+mouse_filter = 2
+texture = SubResource("Food6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball0" type="TextureRect" parent="FlyingSkewer" unique_id=1583131841]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 28.0
+offset_right = 47.0
+offset_bottom = 52.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball1" type="TextureRect" parent="FlyingSkewer" unique_id=568728769]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 18.0
+offset_right = 67.0
+offset_bottom = 42.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball2" type="TextureRect" parent="FlyingSkewer" unique_id=973426660]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 8.0
+offset_right = 87.0
+offset_bottom = 32.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5

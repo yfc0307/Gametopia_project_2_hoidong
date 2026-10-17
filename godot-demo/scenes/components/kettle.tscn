@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://ci7415x1plvw6"]
+[ext_resource type="Material" path="res://ui/sun_backlight.tres" id="sun_backlight"]
+
+
+[ext_resource type="Texture2D" uid="uid://dpk8rq4ch5f0e" path="res://assets/props-sketch.png" id="3"]
+[ext_resource type="Shader" uid="uid://xxj3tlkr1sm7" path="res://scripts/contact_shadow.gdshader" id="4_5d1ni"]
+[ext_resource type="PackedScene" path="res://scenes/components/auto_tea_slot.tscn" id="auto_slot"]
+[ext_resource type="PackedScene" path="res://scenes/components/contact_shadow.tscn" id="contact_shadow"]
+[ext_resource type="Script" uid="uid://dvy1ofb7q3jcu" path="res://scripts/kettle_label.gd" id="label_script"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="shared_theme"]
+[ext_resource type="FontFile" uid="uid://g12wugvwtk8a" path="res://assets/fonts/Iansui-Regular.ttf" id="world_font"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7vb7"]
+resource_local_to_scene = true
+shader = ExtResource("4_5d1ni")
+shader_parameter/shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 0.8862745)
+shader_parameter/contact_center = Vector2(0.5, 0.88)
+shader_parameter/contact_radius = Vector2(0.525, 0.13)
+shader_parameter/lift = 0.0
+
+[sub_resource type="AtlasTexture" id="Prop0"]
+atlas = ExtResource("3")
+region = Rect2(52, 30, 380, 416)
+filter_clip = true
+
+[sub_resource type="StyleBoxFlat" id="Highlight"]
+bg_color = Color(0.7, 0.8, 0.4, 0.12)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68, 0.72, 0.3, 1)
+
+[node name="kettle" type="Control" unique_id=523402540]
+editor_description = "整體位置用 Position，整體大小用 Scale（X、Y 相同保持比例）。Design 內修改圖片與標籤。"
+layout_mode = 3
+anchors_preset = 0
+offset_right = 140.0
+offset_bottom = 168.0
+mouse_filter = 2
+theme = ExtResource("shared_theme")
+script = ExtResource("label_script")
+metadata/tea_index = 0
+metadata/_edit_group_ = true
+
+[node name="Design" type="Control" parent="." unique_id=363331113]
+anchors_preset = 0
+offset_right = 140.0
+offset_bottom = 168.0
+mouse_filter = 2
+
+[node name="ContactShadow" parent="Design" unique_id=1778520056 instance=ExtResource("contact_shadow")]
+material = SubResource("ShaderMaterial_q7vb7")
+offset_bottom = 162.0
+shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 0.8862745)
+contact_center = Vector2(0.5, 0.88)
+contact_radius = Vector2(0.525, 0.13)
+
+[node name="Art" type="TextureRect" parent="Design" unique_id=1899063298]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 150.0
+mouse_filter = 2
+texture = SubResource("Prop0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Tag" type="Control" parent="Design" unique_id=1242246714]
+anchors_preset = 0
+offset_left = 57.0
+offset_top = 49.0
+offset_right = 97.0
+offset_bottom = 129.0
+mouse_filter = 2
+
+[node name="Name" type="Label" parent="Design/Tag" unique_id=806900006]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.15, 0.08, 0.03, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.08, 0.03, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("world_font")
+theme_override_font_sizes/font_size = 18
+text = "廿
+四
+味"
+horizontal_alignment = 1
+
+[node name="Highlight" type="Panel" parent="Design" unique_id=172499934]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 168.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Highlight")
+
+[node name="AutoBowl" parent="Design" unique_id=291093449 instance=ExtResource("auto_slot")]
+visible = false
+anchors_preset = 0

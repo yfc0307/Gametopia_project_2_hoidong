@@ -1,0 +1,51 @@
+[gd_scene format=3]
+[ext_resource type="Shader" path="res://scripts/cloud_shadow.gdshader" id="cloud_shadow_shader"]
+
+
+[ext_resource type="Script" path="res://scripts/window_sunlight.gd" id="script"]
+[ext_resource type="Shader" path="res://scripts/window_light_patch.gdshader" id="patch_shader"]
+[sub_resource type="Gradient" id="gradient"]
+offsets = PackedFloat32Array(0, 0.6, 1)
+colors = PackedColorArray(1,1,1,1, 1,1,1,0.9, 0,0,0,0)
+[sub_resource type="GradientTexture2D" id="light_texture"]
+gradient = SubResource("gradient")
+width = 1500
+height = 1500
+fill = 1
+fill_from = Vector2(0.5,0.5)
+fill_to = Vector2(1,0.5)
+[sub_resource type="ShaderMaterial" id="patch"]
+shader = ExtResource("patch_shader")
+[sub_resource type="ShaderMaterial" id="cloud_shadow_material"]
+resource_local_to_scene = true
+shader = ExtResource("cloud_shadow_shader")
+[node name="WindowSunlight" type="Node2D"]
+script = ExtResource("script")
+editor_description = "Sun 是窗外光源，可直接拖動；WindowPatch 是桌面光區，可調位置大小。亮度請調根節點 Sunlight Energy；Patch Strength 控制窗光色塊。子節點 Sun.energy 由根節點驅動。色溫與雲影亦在根節點 Inspector。"
+[node name="Sun" type="PointLight2D" parent="."]
+position = Vector2(470,35)
+color = Color(1,0.86,0.61,1)
+energy = 0.8
+texture = SubResource("light_texture")
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_color = Color(0.15,0.09,0.05,0.8)
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+shadow_item_cull_mask = 2
+[node name="WindowPatch" type="ColorRect" parent="."]
+light_mask = 2
+material = SubResource("patch")
+offset_left = 140.0
+offset_top = 270.0
+offset_right = 1120.0
+offset_bottom = 600.0
+mouse_filter = 2
+
+[node name="CloudShade" type="ColorRect" parent="."]
+material = SubResource("cloud_shadow_material")
+offset_left = 140.0
+offset_top = 270.0
+offset_right = 1120.0
+offset_bottom = 600.0
+mouse_filter = 2

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://u0h8cx0ytpm2"]
+
+[ext_resource type="Script" uid="uid://d0qyswfip38gl" path="res://scripts/tram_traffic.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/components/hong_kong_tram.tscn" id="tram"]
+
+[node name="TramTraffic" type="Control" unique_id=1380473025]
+editor_description = "電車在窗口後方由左往右駛過。調整 Tram 的 Y／Scale 改車道與大小；出現間隔及速度在此設定。"
+layout_mode = 3
+anchors_preset = 0
+offset_right = 829.0
+offset_bottom = 181.0
+mouse_filter = 2
+script = ExtResource("script")
+
+[node name="Tram" parent="." unique_id=2058615215 instance=ExtResource("tram")]
+anchors_preset = 0
+scale = Vector2(1.155, 1.155)

@@ -1,0 +1,295 @@
+[gd_scene format=3]
+
+
+[ext_resource type="PackedScene" path="res://scenes/components/upgrade_tests.tscn" id="upgrade_tests"]
+
+[ext_resource type="Texture2D" path="res://assets/shop-sketch.png" id="2"]
+
+
+[ext_resource type="Theme" path="res://ui/theme.tres" id="shared_theme"]
+
+
+[ext_resource type="PackedScene" path="res://scenes/components/ui_juice.tscn" id="ui_juice"]
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(1, 0.973, 0.91, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.62, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Map" type="Control"]
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+theme = ExtResource("shared_theme")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("2")
+expand_mode = 1
+
+[node name="Wash" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.97, 0.94, 0.86, 0.88)
+
+[node name="Brand" type="Label" parent="."]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 35.0
+offset_right = 670.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 15
+text = "HOI DONG / PLAYTEST 01"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 70.0
+offset_right = 670.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 68
+text = "開檔"
+
+[node name="Subtitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 160.0
+offset_right = 673.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 23
+text = "一碗涼茶，一段街坊日常。"
+
+[node name="StatsPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 32.0
+offset_right = 1210.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="Stats" type="Label" parent="StatsPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 21
+text = "第 1 天 · 持有 $0"
+
+[node name="ShopCard0" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 240.0
+offset_right = 455.0
+offset_bottom = 440.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="Title" type="Label" parent="ShopCard0"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 42.0
+offset_right = 320.0
+offset_bottom = 94.0
+theme_override_font_sizes/font_size = 34
+text = "涼茶舖"
+
+[node name="Caption" type="Label" parent="ShopCard0"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 110.0
+offset_right = 325.0
+offset_bottom = 148.0
+theme_override_font_sizes/font_size = 18
+text = "五款涼茶 · 茶葉蛋"
+
+[node name="ShopCard1" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 495.0
+offset_top = 240.0
+offset_right = 830.0
+offset_bottom = 440.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="Title" type="Label" parent="ShopCard1"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 42.0
+offset_right = 320.0
+offset_bottom = 94.0
+theme_override_font_sizes/font_size = 34
+text = "下一間店"
+
+[node name="Caption" type="Label" parent="ShopCard1"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 110.0
+offset_right = 325.0
+offset_bottom = 148.0
+theme_override_font_sizes/font_size = 18
+text = "未開放 · 後續階段"
+
+[node name="ShopCard2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 870.0
+offset_top = 240.0
+offset_right = 1205.0
+offset_bottom = 440.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="Title" type="Label" parent="ShopCard2"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 42.0
+offset_right = 320.0
+offset_bottom = 94.0
+theme_override_font_sizes/font_size = 34
+text = "茶樓"
+
+[node name="Caption" type="Label" parent="ShopCard2"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 110.0
+offset_right = 325.0
+offset_bottom = 148.0
+theme_override_font_sizes/font_size = 18
+text = "未開放 · 後續階段"
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 460.0
+offset_right = 410.0
+offset_bottom = 515.0
+text = "開檔營業 →"
+metadata/action = "start_day"
+
+[node name="Upgrade" type="Button" parent="."]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 528.0
+offset_right = 410.0
+offset_bottom = 575.0
+text = "設備與升級"
+metadata/action = "show_upgrades"
+
+[node name="Help" type="Button" parent="."]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 588.0
+offset_right = 274.0
+offset_bottom = 628.0
+text = "操作說明"
+metadata/action = "show_help"
+
+[node name="Sound" type="Button" parent="."]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 588.0
+offset_right = 410.0
+offset_bottom = 628.0
+text = "音效：開"
+metadata/action = "toggle_sound"
+
+[node name="ProgressPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 468.0
+offset_right = 1155.0
+offset_bottom = 642.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="Title" type="Label" parent="ProgressPanel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 10.0
+offset_right = 630.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 24
+text = "開下一間舖的積蓄"
+
+[node name="Amounts" type="Label" parent="ProgressPanel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 50.0
+offset_right = 630.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 21
+text = "$0 / $1200"
+
+[node name="Progress" type="ProgressBar" parent="ProgressPanel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 95.0
+offset_right = 630.0
+offset_bottom = 108.0
+mouse_filter = 2
+show_percentage = false
+
+[node name="Caption" type="Label" parent="ProgressPanel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 123.0
+offset_right = 630.0
+offset_bottom = 163.0
+theme_override_font_sizes/font_size = 16
+text = "首輪先驗證營業循環；升級下一階段接入。"
+
+[node name="UpgradeTests" parent="." instance=ExtResource("upgrade_tests")]
+
+[node name="Juice" parent="Start" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Upgrade" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Help" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Sound" instance=ExtResource("ui_juice")]
+
+[node name="EntranceJuice" parent="Brand" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.000
+
+[node name="EntranceJuice" parent="Title" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.045
+
+[node name="EntranceJuice" parent="Subtitle" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.090
+
+[node name="EntranceJuice" parent="StatsPanel" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.135
+
+[node name="EntranceJuice" parent="ShopCard0" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.180
+
+[node name="EntranceJuice" parent="ShopCard1" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.225
+
+[node name="EntranceJuice" parent="ShopCard2" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.270
+
+[node name="EntranceJuice" parent="ProgressPanel" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.270

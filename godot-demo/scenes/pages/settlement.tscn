@@ -1,0 +1,221 @@
+[gd_scene format=3 uid="uid://cdgfgaukdbhfi"]
+
+[ext_resource type="Texture2D" uid="uid://c4tnk7ti0fc8h" path="res://assets/shop-sketch.png" id="2"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="shared_theme"]
+
+[ext_resource type="PackedScene" path="res://scenes/components/ui_juice.tscn" id="ui_juice"]
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(1, 0.973, 0.91, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.62, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Summary" type="Control" unique_id=1856508548]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+theme = ExtResource("shared_theme")
+
+[node name="Background" type="TextureRect" parent="." unique_id=714028349]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("2")
+expand_mode = 1
+
+[node name="Wash" type="ColorRect" parent="." unique_id=1017379251]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.97, 0.94, 0.86, 0.94)
+
+[node name="Receipt" type="Panel" parent="." unique_id=518327153]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 65.0
+offset_right = 930.0
+offset_bottom = 675.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="Title" type="Label" parent="Receipt" unique_id=1523514559]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 31.0
+offset_right = 547.0
+offset_bottom = 101.0
+theme_override_font_sizes/font_size = 45
+text = "收工結算"
+
+[node name="Day" type="Label" parent="Receipt" unique_id=39248600]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 92.0
+offset_right = 564.0
+offset_bottom = 127.0
+theme_override_font_sizes/font_size = 19
+text = "第 1 天 · 涼茶舖"
+
+[node name="IncomeTitle" type="Label" parent="Receipt" unique_id=1532191502]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 175.0
+offset_right = 332.0
+offset_bottom = 215.0
+theme_override_font_sizes/font_size = 23
+text = "本次收入"
+
+[node name="Income" type="Label" parent="Receipt" unique_id=1661670189]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 175.0
+offset_right = 550.0
+offset_bottom = 215.0
+theme_override_font_sizes/font_size = 27
+text = "$ 0"
+
+[node name="CompletedTitle" type="Label" parent="Receipt" unique_id=1869169919]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 237.0
+offset_right = 332.0
+offset_bottom = 277.0
+theme_override_font_sizes/font_size = 23
+text = "完成訂單"
+
+[node name="Completed" type="Label" parent="Receipt" unique_id=1996562147]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 237.0
+offset_right = 550.0
+offset_bottom = 277.0
+theme_override_font_sizes/font_size = 27
+text = "$ 0"
+
+[node name="IncompleteTitle" type="Label" parent="Receipt" unique_id=939872651]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 299.0
+offset_right = 332.0
+offset_bottom = 339.0
+theme_override_font_sizes/font_size = 23
+text = "未完成訂單"
+
+[node name="Incomplete" type="Label" parent="Receipt" unique_id=394616293]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 299.0
+offset_right = 550.0
+offset_bottom = 339.0
+theme_override_font_sizes/font_size = 27
+text = "$ 0"
+
+[node name="TotalTitle" type="Label" parent="Receipt" unique_id=630166781]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 361.0
+offset_right = 332.0
+offset_bottom = 401.0
+theme_override_font_sizes/font_size = 23
+text = "目前總金錢"
+
+[node name="Total" type="Label" parent="Receipt" unique_id=1647884643]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 361.0
+offset_right = 550.0
+offset_bottom = 401.0
+theme_override_font_sizes/font_size = 27
+text = "$ 0"
+
+[node name="Note" type="Label" parent="Receipt" unique_id=1279116779]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 430.0
+offset_right = 550.0
+offset_bottom = 465.0
+theme_override_font_sizes/font_size = 17
+text = "收工未交齊的訂單不計收入。"
+
+[node name="Metrics" type="Label" parent="Receipt" unique_id=672940734]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 475.0
+offset_right = 550.0
+offset_bottom = 510.0
+theme_override_font_sizes/font_size = 16
+text = "多人同場 0%"
+
+[node name="Return" type="Button" parent="." unique_id=375183661]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 594.0
+offset_right = 810.0
+offset_bottom = 650.0
+text = "返回選關主頁 →"
+metadata/action = "show_map"
+
+[node name="Juice" parent="Return" instance=ExtResource("ui_juice")]
+
+[node name="EntranceJuice" parent="Receipt" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.000
+
+[node name="EntranceJuice" parent="Receipt/Title" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.045
+
+[node name="EntranceJuice" parent="Receipt/Day" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.090
+
+[node name="EntranceJuice" parent="Receipt/IncomeTitle" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.135
+
+[node name="EntranceJuice" parent="Receipt/Income" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.180
+
+[node name="EntranceJuice" parent="Receipt/CompletedTitle" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.225
+
+[node name="EntranceJuice" parent="Receipt/Completed" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.270
+
+[node name="EntranceJuice" parent="Receipt/IncompleteTitle" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.270
+
+[node name="EntranceJuice" parent="Receipt/Incomplete" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.270
+
+[node name="EntranceJuice" parent="Receipt/TotalTitle" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.270
+
+[node name="EntranceJuice" parent="Receipt/Total" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.270
+
+[node name="EntranceJuice" parent="Receipt/Note" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.270
+
+[node name="EntranceJuice" parent="Receipt/Metrics" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.270

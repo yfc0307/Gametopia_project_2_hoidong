@@ -1,0 +1,22 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/floating_feedback.gd" id="script"]
+[ext_resource type="FontFile" path="res://assets/fonts/jf-openhuninn-2.1.ttf" id="font"]
+[sub_resource type="FontVariation" id="bold"]
+base_font = ExtResource("font")
+variation_embolden = 1.0
+[node name="FloatingFeedback" type="Node2D"]
+script = ExtResource("script")
+[node name="Text" type="Label" parent="."]
+offset_left = -200.0
+offset_top = -24.0
+offset_right = 200.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 27
+theme_override_constants/outline_size = 8
+theme_override_colors/font_outline_color = Color(0,0,0,1)
+theme_override_colors/font_color = Color(0.36,0.94,0.49,1)
+text = "唔該~"
+horizontal_alignment = 1
+vertical_alignment = 1

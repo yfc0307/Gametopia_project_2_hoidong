@@ -1,0 +1,45 @@
+extends SceneTree
+
+func _init() -> void:
+	call_deferred("run")
+
+func run() -> void:
+	var ui = load("res://main.tscn").instantiate()
+	root.add_child(ui)
+	ui.set_process(false)
+	ui.start_day()
+	var art: TextureRect = ui.get_node("Shop/Kettles/Kettle0/Design/Art")
+	var home_tag: Control = art.get_parent().get_node("Tag")
+	var name_label: Label = home_tag.get_node("Name")
+	var original_transform := art.get_global_transform()
+	# Include an editor-authored scale to detect effects ignoring equipment scale.
+	art.get_parent().scale = Vector2(1.2, 1.2)
+	ui.begin_drag(ui.kettle_rect(0).get_center())
+	assert(ui.drag == "kettle")
+	ui.pointer = Vector2(600, 250)
+	ui.sync_ui()
+	var ghost: TextureRect = ui.get_node("Shop/Effects/DragGhost")
+	var label: Label = ghost.get_node("TeaName")
+	assert(ghost.size.is_equal_approx(art.size))
+	assert(ghost.get_global_transform().get_scale().is_equal_approx(art.get_global_transform().get_scale()))
+	assert(label.text == name_label.text and label.visible)
+	assert(not art.visible and not home_tag.visible)
+	var source_relative := art.get_global_transform().affine_inverse() * name_label.get_global_transform()
+	var ghost_relative := ghost.get_global_transform().affine_inverse() * label.get_global_transform()
+	assert(source_relative.is_equal_approx(ghost_relative))
+	ui.finish_drag(Vector2(1100, 650))
+	assert(ui.return_time > 0 and not home_tag.visible)
+	ui.return_time = 0
+	ui.sync_ui()
+	assert(art.visible and home_tag.visible)
+	art.get_parent().scale = Vector2.ONE
+	assert(art.get_global_transform().is_equal_approx(original_transform))
+	ui.game.place_bowl()
+	ui.game.pour(0)
+	ui.sync_ui()
+	var pouring: TextureRect = ui.get_node("Shop/Effects/PourKettle")
+	assert(pouring.size.is_equal_approx(art.size))
+	assert(pouring.get_node("TeaName").text == name_label.text)
+	assert(not home_tag.visible)
+	print("DRAG VISUALS PASSED: source size/scale, attached tea name, return, pouring, authored transforms")
+	quit()

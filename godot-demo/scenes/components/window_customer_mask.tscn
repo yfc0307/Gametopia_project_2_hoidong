@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[node name="WindowMask" type="Control"]
+clip_contents = true
+offset_right = 870.0
+offset_bottom = 185.0
+mouse_filter = 2
+metadata/_edit_lock_ = true

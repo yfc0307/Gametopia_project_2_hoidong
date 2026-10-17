@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bw2vadd0xd788"]
+
+[ext_resource type="Script" uid="uid://bbq7bnydo4oex" path="res://scripts/contact_shadow.gd" id="script"]
+[ext_resource type="Shader" uid="uid://xxj3tlkr1sm7" path="res://scripts/contact_shadow.gdshader" id="shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d2n0l"]
+resource_local_to_scene = true
+shader = ExtResource("shader")
+shader_parameter/shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 1)
+shader_parameter/contact_center = Vector2(0.5, 0.93)
+shader_parameter/contact_radius = Vector2(0.43, 0.065)
+shader_parameter/lift = 0.0
+
+[node name="ContactShadow" type="ColorRect" unique_id=133674795 groups=["contact_shadows"]]
+editor_description = "指定 Target Visual 即可自動貼合圖片；在此調陰影顏色、中心與半徑，不需改玩法程式。"
+material = SubResource("ShaderMaterial_d2n0l")
+offset_right = 140.0
+offset_bottom = 150.0
+mouse_filter = 2
+script = ExtResource("script")
+shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 1)

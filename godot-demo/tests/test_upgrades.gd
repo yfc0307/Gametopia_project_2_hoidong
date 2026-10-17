@@ -1,0 +1,41 @@
+extends SceneTree
+const Service = preload("res://scripts/upgraded_service.gd")
+func _init() -> void:
+	call_deferred("run")
+func run() -> void:
+	var cfg: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://config/balance.json"))
+	var s = Service.new(cfg, {}, ["egg_fast", "auto_tea", "jelly", "siumai", "fish", "fish_fast"])
+	s.start()
+	assert(s.cfg.egg_seconds == 5.0)
+	assert(s.jelly == 4 and s.siumai == 6 and s.raw_fish == 12)
+	assert(not s.restock())
+	assert(s.cook()); s.tick(5.0); assert(s.pot == "ready")
+	assert(s.auto_slots[0].state == "full")
+	assert(s.pickup_auto(0)); s.tick(2); assert(s.auto_slots[0].state == "held")
+	s.return_auto(); assert(s.auto_slots[0].state == "full")
+	assert(s.pickup_auto(0)); assert(s.discard("tea")); assert(s.auto_slots[0].state == "pouring")
+	s.tick(1.2); assert(s.auto_slots[0].state == "full")
+	assert(s.add_fish(0)); assert(s.lanes[0].size() == 6 and s.raw_fish == 6)
+	assert(not s.add_fish(0)); s.tick(3)
+	assert(s.add_fish(1)); assert(s.raw_fish == 0)
+	s.tick(3); assert(s.lanes[0][0] == 0 and s.lanes[1][0] == 3)
+	assert(s.place_skewer()); assert(s.spear_fish(0,0)); assert(s.lanes[0].size() == 5)
+	assert(not s.spear_fish(1,0)); s.tick(.18); assert(s.skewer_count == 1)
+	s.tick(.35); assert(s.fish_return_left > 0); s.tick(.25); assert(not s.fish_in_machine)
+	assert(s.spear_fish(0,0)); s.tick(.18); s.tick(.35); s.tick(.25)
+	assert(s.skewer_count == 2)
+	var c: Dictionary = s.make_customer()
+	c.present = true; c.tea = -1; c.tea_done = true; c.eggs = 0; c.eggs_done = 0
+	c.jelly = false; c.jelly_done = true; c.siumai = 0; c.siumai_done = 0; c.fish = 0; c.fish_done = false
+	s.customers[0] = c
+	assert(s.deliver(0,"fish")); assert(s.earned == 8 and s.complete_count == 1)
+	assert(s.place_skewer()); assert(not s.deliver(1,"fish")); assert(s.discard("empty_skewer"))
+	s.jelly = 2; assert(s.restock()); s.tick(cfg.restock_seconds); assert(s.jelly == 4 and s.raw_fish == 12)
+	for i in range(200):
+		c = s.make_customer()
+		var types: int = int(c.tea >= 0) + int(c.eggs > 0) + int(c.jelly) + int(c.siumai > 0) + int(c.fish >= 0)
+		assert(types >= 1 and types <= 3)
+	var base = Service.new(cfg, {}, ["fish"]); base.start(); assert(base.add_fish(0)); assert(base.lanes[0].size() == 2)
+	s.left = .01; s.tick(.1); assert(not s.add_fish(0) and not s.pickup_auto(0))
+	print("PASS: six upgrades, independent cooking, partial skewers, stock, orders and closing")
+	quit()

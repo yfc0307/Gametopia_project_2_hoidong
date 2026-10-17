@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://bs20a8mjp5hm5"]
+[ext_resource type="Material" path="res://ui/sun_backlight.tres" id="sun_backlight"]
+
+
+[ext_resource type="Texture2D" uid="uid://dpk8rq4ch5f0e" path="res://assets/props-sketch.png" id="3"]
+[ext_resource type="Shader" uid="uid://xxj3tlkr1sm7" path="res://scripts/contact_shadow.gdshader" id="4_j5k8v"]
+[ext_resource type="PackedScene" uid="uid://bw2vadd0xd788" path="res://scenes/components/contact_shadow.tscn" id="contact_shadow"]
+[ext_resource type="PackedScene" path="res://scenes/components/equipment_label_frame.tscn" id="label_frame"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="shared_theme"]
+[ext_resource type="FontFile" uid="uid://g12wugvwtk8a" path="res://assets/fonts/Iansui-Regular.ttf" id="world_font"]
+
+[sub_resource type="AtlasTexture" id="Prop5"]
+atlas = ExtResource("3")
+region = Rect2(475, 493, 429, 394)
+filter_clip = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iuxjy"]
+resource_local_to_scene = true
+shader = ExtResource("4_j5k8v")
+shader_parameter/shadow_color = Color(0.25587642, 0.12724227, 0.042878002, 1)
+shader_parameter/contact_center = Vector2(0.505, 0.825)
+shader_parameter/contact_radius = Vector2(0.44, 0.2)
+shader_parameter/lift = 0.0
+
+[sub_resource type="StyleBoxFlat" id="Highlight"]
+bg_color = Color(0.7, 0.8, 0.4, 0.12)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68, 0.72, 0.3, 1)
+
+[sub_resource type="AtlasTexture" id="EggImage"]
+atlas = ExtResource("3")
+region = Rect2(927, 157, 225, 274)
+filter_clip = true
+
+[node name="warming_pot" type="Control" unique_id=815384591]
+editor_description = "整體位置用 Position，整體大小用 Scale（X、Y 相同保持比例）。Design 內修改圖片與標籤。"
+layout_mode = 3
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 150.0
+mouse_filter = 2
+theme = ExtResource("shared_theme")
+metadata/_edit_group_ = true
+
+[node name="Design" type="Control" parent="." unique_id=2069384493]
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 150.0
+mouse_filter = 2
+
+[node name="Art" type="TextureRect" parent="Design" unique_id=469004968]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 112.0
+mouse_filter = 2
+texture = SubResource("Prop5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContactShadow" parent="Design/Art" unique_id=177701099 instance=ExtResource("contact_shadow")]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_iuxjy")
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 124.0
+color = Color(0, 0, 0, 1)
+target_visual = NodePath("..")
+shadow_color = Color(0.25587642, 0.12724227, 0.042878002, 1)
+contact_center = Vector2(0.505, 0.825)
+contact_radius = Vector2(0.44, 0.2)
+
+[node name="Status" type="Label" parent="Design" unique_id=210115893]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 0
+offset_top = 118.0
+offset_right = 160.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0.15, 0.08, 0.03, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.08, 0.03, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("world_font")
+theme_override_font_sizes/font_size = 18
+text = "保溫爐 0 / 6"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Design/Status" unique_id=728365113 instance=ExtResource("label_frame")]
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Highlight" type="Panel" parent="Design" unique_id=1321759726]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 150.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Highlight")
+
+[node name="Egg0" type="TextureRect" parent="Design" unique_id=266146829]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 43.0
+offset_top = 17.0
+offset_right = 66.0
+offset_bottom = 44.0
+mouse_filter = 2
+texture = SubResource("EggImage")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Egg1" type="TextureRect" parent="Design" unique_id=44607317]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 66.0
+offset_top = 17.0
+offset_right = 89.0
+offset_bottom = 44.0
+mouse_filter = 2
+texture = SubResource("EggImage")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Egg2" type="TextureRect" parent="Design" unique_id=2123146452]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 89.0
+offset_top = 17.0
+offset_right = 112.0
+offset_bottom = 44.0
+mouse_filter = 2
+texture = SubResource("EggImage")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Egg3" type="TextureRect" parent="Design" unique_id=1742631083]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 43.0
+offset_top = 38.0
+offset_right = 66.0
+offset_bottom = 65.0
+mouse_filter = 2
+texture = SubResource("EggImage")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Egg4" type="TextureRect" parent="Design" unique_id=2090842950]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 66.0
+offset_top = 38.0
+offset_right = 89.0
+offset_bottom = 65.0
+mouse_filter = 2
+texture = SubResource("EggImage")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Egg5" type="TextureRect" parent="Design" unique_id=92542991]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 89.0
+offset_top = 38.0
+offset_right = 112.0
+offset_bottom = 65.0
+mouse_filter = 2
+texture = SubResource("EggImage")
+expand_mode = 1
+stretch_mode = 5

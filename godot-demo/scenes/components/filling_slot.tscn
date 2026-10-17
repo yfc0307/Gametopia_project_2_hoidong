@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://dilxd06cucud1"]
+[ext_resource type="Material" path="res://ui/sun_backlight.tres" id="sun_backlight"]
+
+
+[ext_resource type="Texture2D" uid="uid://dpk8rq4ch5f0e" path="res://assets/props-sketch.png" id="3"]
+[ext_resource type="Shader" uid="uid://xxj3tlkr1sm7" path="res://scripts/contact_shadow.gdshader" id="4_b5vxe"]
+[ext_resource type="PackedScene" uid="uid://bw2vadd0xd788" path="res://scenes/components/contact_shadow.tscn" id="contact_shadow"]
+[ext_resource type="PackedScene" path="res://scenes/components/equipment_label_frame.tscn" id="label_frame"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="shared_theme"]
+[ext_resource type="Texture2D" uid="uid://f8qx4tdvbx7t" path="res://assets/tea-bowl-sketch.png" id="visual_new"]
+[ext_resource type="FontFile" uid="uid://g12wugvwtk8a" path="res://assets/fonts/Iansui-Regular.ttf" id="world_font"]
+
+[sub_resource type="StyleBoxFlat" id="Highlight"]
+bg_color = Color(0.7, 0.8, 0.4, 0.12)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68, 0.72, 0.3, 1)
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(1, 0.973, 0.91, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.62, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="AtlasTexture" id="Prop1"]
+atlas = ExtResource("3")
+region = Rect2(509, 198, 333, 228)
+filter_clip = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2e7h5"]
+resource_local_to_scene = true
+shader = ExtResource("4_b5vxe")
+shader_parameter/shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 1)
+shader_parameter/contact_center = Vector2(0.5, 0.785)
+shader_parameter/contact_radius = Vector2(0.345, 0.18)
+shader_parameter/lift = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5mywd"]
+resource_local_to_scene = true
+shader = ExtResource("4_b5vxe")
+shader_parameter/shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 1)
+shader_parameter/contact_center = Vector2(0.5, 0.785)
+shader_parameter/contact_radius = Vector2(0.345, 0.18)
+shader_parameter/lift = 0.0
+
+[node name="filling_slot" type="Control" unique_id=1190865238]
+editor_description = "整體位置用 Position，整體大小用 Scale（X、Y 相同保持比例）。Design 內修改圖片與標籤。"
+layout_mode = 3
+anchors_preset = 0
+offset_right = 140.0
+offset_bottom = 95.0
+mouse_filter = 2
+theme = ExtResource("shared_theme")
+metadata/_edit_group_ = true
+
+[node name="Design" type="Control" parent="." unique_id=1603769822]
+anchors_preset = 0
+offset_right = 140.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="Highlight" type="Panel" parent="Design" unique_id=610418740]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 95.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Highlight")
+
+[node name="Mat" type="Panel" parent="Design" unique_id=2075349707]
+visible = false
+layout_mode = 0
+offset_right = 152.0
+offset_bottom = 73.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="EmptyBowl" type="TextureRect" parent="Design" unique_id=593588511]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = SubResource("Prop1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContactShadow" parent="Design/EmptyBowl" unique_id=379419542 instance=ExtResource("contact_shadow")]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_2e7h5")
+layout_mode = 0
+offset_bottom = 72.0
+target_visual = NodePath("..")
+contact_center = Vector2(0.5, 0.785)
+contact_radius = Vector2(0.345, 0.18)
+
+[node name="FullBowl" type="TextureRect" parent="Design" unique_id=949566542]
+light_mask = 3
+material = ExtResource("sun_backlight")
+visible = false
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = ExtResource("visual_new")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContactShadow" parent="Design/FullBowl" unique_id=737937302 instance=ExtResource("contact_shadow")]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_5mywd")
+layout_mode = 0
+offset_bottom = 72.0
+target_visual = NodePath("..")
+contact_center = Vector2(0.5, 0.785)
+contact_radius = Vector2(0.345, 0.18)
+
+[node name="Status" type="Label" parent="Design" unique_id=1669464194]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 0
+offset_top = 63.0
+offset_right = 140.0
+offset_bottom = 95.0
+theme_override_colors/font_color = Color(0.15, 0.08, 0.03, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.08, 0.03, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("world_font")
+theme_override_font_sizes/font_size = 18
+text = "裝填位"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Design/Status" unique_id=401337251 instance=ExtResource("label_frame")]
+grow_horizontal = 2
+grow_vertical = 2

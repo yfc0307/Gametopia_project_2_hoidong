@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://dhnnfdko1nds2"]
+
+[ext_resource type="Texture2D" uid="uid://c4tnk7ti0fc8h" path="res://assets/shop-sketch.png" id="2"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="shared_theme"]
+
+[ext_resource type="PackedScene" path="res://scenes/components/ui_juice.tscn" id="ui_juice"]
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(1, 0.973, 0.91, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.62, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Help" type="Control" unique_id=439666609]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+theme = ExtResource("shared_theme")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1238431067]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("2")
+expand_mode = 1
+
+[node name="Wash" type="ColorRect" parent="." unique_id=1141507700]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.97, 0.94, 0.86, 0.94)
+
+[node name="Sheet" type="Panel" parent="." unique_id=424855198]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 58.0
+offset_right = 1040.0
+offset_bottom = 678.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="Title" type="Label" parent="Sheet" unique_id=615257487]
+layout_mode = 0
+offset_left = 306.0
+offset_top = 27.0
+offset_right = 706.0
+offset_bottom = 97.0
+theme_override_font_sizes/font_size = 42
+text = "開檔小抄"
+
+[node name="Step0" type="Label" parent="Sheet" unique_id=364104196]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 120.0
+offset_right = 773.0
+offset_bottom = 155.0
+theme_override_font_sizes/font_size = 21
+text = "拖陶瓷碗到裝填位，再拖相應水壺到碗上。"
+
+[node name="Step1" type="Label" parent="Sheet" unique_id=2139823745]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 162.0
+offset_right = 773.0
+offset_bottom = 197.0
+theme_override_font_sizes/font_size = 21
+text = "倒滿後拖給顧客；不同茶款會少收錢。"
+
+[node name="Step2" type="Label" parent="Sheet" unique_id=185614416]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 204.0
+offset_right = 773.0
+offset_bottom = 239.0
+theme_override_font_sizes/font_size = 21
+text = "拖六個生蛋入煮爐，等 8 秒煮熟。"
+
+[node name="Step3" type="Label" parent="Sheet" unique_id=701974762]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 246.0
+offset_right = 773.0
+offset_bottom = 281.0
+theme_override_font_sizes/font_size = 21
+text = "點熟蛋煮爐補滿保溫爐，再逐個拖蛋交付。"
+
+[node name="Step4" type="Label" parent="Sheet" unique_id=1639395961]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 288.0
+offset_right = 773.0
+offset_bottom = 323.0
+theme_override_font_sizes/font_size = 21
+text = "點左牆電話，1.5 秒免費補滿生蛋。"
+
+[node name="Step5" type="Label" parent="Sheet" unique_id=926749729]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 330.0
+offset_right = 773.0
+offset_bottom = 365.0
+theme_override_font_sizes/font_size = 21
+text = "食物拖到垃圾桶丟棄；無效落點回彈。"
+
+[node name="Step6" type="Label" parent="Sheet" unique_id=205329174]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 372.0
+offset_right = 773.0
+offset_bottom = 407.0
+theme_override_font_sizes/font_size = 21
+text = "交齊即付款；耐心耗盡按已交付內容結算。"
+
+[node name="Step7" type="Label" parent="Sheet" unique_id=1309298545]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 414.0
+offset_right = 773.0
+offset_bottom = 449.0
+theme_override_font_sizes/font_size = 21
+text = "倒數歸零收工，未完成訂單收入為零。"
+
+[node name="Step8" type="Label" parent="Sheet" unique_id=842443933]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 456.0
+offset_right = 773.0
+offset_bottom = 491.0
+theme_override_font_sizes/font_size = 21
+text = "ESC 暫停／繼續；切換視窗會自動暫停。"
+
+[node name="Return" type="Button" parent="." unique_id=635933081]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 608.0
+offset_right = 810.0
+offset_bottom = 656.0
+text = "知道了，返回選關"
+metadata/action = "show_map"
+
+[node name="Juice" parent="Return" instance=ExtResource("ui_juice")]
+
+[node name="EntranceJuice" parent="Sheet" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.000

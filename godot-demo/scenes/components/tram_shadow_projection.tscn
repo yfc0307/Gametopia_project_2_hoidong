@@ -1,0 +1,14 @@
+[gd_scene format=3]
+[ext_resource type="Shader" path="res://scripts/tram_shadow_projection.gdshader" id="shader"]
+[sub_resource type="ShaderMaterial" id="shadow"]
+resource_local_to_scene = true
+shader = ExtResource("shader")
+[node name="TramShadowProjection" type="ColorRect"]
+visible = false
+z_index = 20
+material = SubResource("shadow")
+offset_top = 270.0
+offset_right = 1280.0
+offset_bottom = 600.0
+mouse_filter = 2
+metadata/_edit_lock_ = true

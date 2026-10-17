@@ -1,0 +1,260 @@
+[gd_scene format=3]
+[ext_resource type="Theme" path="res://ui/theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://scenes/components/ui_juice.tscn" id="ui_juice"]
+
+[sub_resource type="StyleBoxFlat" id="Paper"]
+bg_color = Color(1,0.97,0.86,0.98)
+border_width_left = 2
+border_width_right = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.55,0.27,0.18,1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+
+[node name="Upgrades" type="Control"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+theme = ExtResource("theme")
+
+[node name="Wash" type="ColorRect" parent="."]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.93,0.90,0.79,1)
+
+[node name="Sheet" type="Panel" parent="."]
+offset_left = 130.0
+offset_top = 35.0
+offset_right = 1150.0
+offset_bottom = 685.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Paper")
+
+[node name="Title" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 970.0
+offset_bottom = 70.0
+text = "開檔 · 設備點心紙"
+theme_override_font_sizes/font_size = 34
+
+[node name="Money" type="Label" parent="Sheet"]
+offset_left = 720.0
+offset_top = 25.0
+offset_right = 990.0
+offset_bottom = 65.0
+text = "持有 $0"
+theme_override_font_sizes/font_size = 24
+
+[node name="Title_egg_fast" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 90.0
+offset_right = 740.0
+offset_bottom = 118.0
+text = "（速）茶葉蛋提速"
+theme_override_font_sizes/font_size = 23
+
+[node name="Desc_egg_fast" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 121.0
+offset_right = 775.0
+offset_bottom = 148.0
+text = "煮蛋 8 秒 → 5 秒"
+theme_override_font_sizes/font_size = 18
+
+[node name="Buy_egg_fast" type="Button" parent="Sheet"]
+offset_left = 800.0
+offset_top = 90.0
+offset_right = 970.0
+offset_bottom = 144.0
+text = "購買"
+metadata/action = "purchase_egg_fast"
+
+[node name="Title_auto_tea" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 165.0
+offset_right = 740.0
+offset_bottom = 193.0
+text = "（自）五茶自動補碗"
+theme_override_font_sizes/font_size = 23
+
+[node name="Desc_auto_tea" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 196.0
+offset_right = 775.0
+offset_bottom = 223.0
+text = "每壺獨立倒茶；拿起不補，交付／丟棄後補"
+theme_override_font_sizes/font_size = 18
+
+[node name="Buy_auto_tea" type="Button" parent="Sheet"]
+offset_left = 800.0
+offset_top = 165.0
+offset_right = 970.0
+offset_bottom = 219.0
+text = "購買"
+metadata/action = "purchase_auto_tea"
+
+[node name="Title_jelly" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 240.0
+offset_right = 740.0
+offset_bottom = 268.0
+text = "（增）龜苓膏"
+theme_override_font_sizes/font_size = 23
+
+[node name="Desc_jelly" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 271.0
+offset_right = 775.0
+offset_bottom = 298.0
+text = "四份成品，直接拖給顧客；電話補滿"
+theme_override_font_sizes/font_size = 18
+
+[node name="Buy_jelly" type="Button" parent="Sheet"]
+offset_left = 800.0
+offset_top = 240.0
+offset_right = 970.0
+offset_bottom = 294.0
+text = "購買"
+metadata/action = "purchase_jelly"
+
+[node name="Title_siumai" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 315.0
+offset_right = 740.0
+offset_bottom = 343.0
+text = "（增）燒賣蒸籠"
+theme_override_font_sizes/font_size = 23
+
+[node name="Desc_siumai" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 346.0
+offset_right = 775.0
+offset_bottom = 373.0
+text = "六個熟燒賣，逐個交付；電話補滿"
+theme_override_font_sizes/font_size = 18
+
+[node name="Buy_siumai" type="Button" parent="Sheet"]
+offset_left = 800.0
+offset_top = 315.0
+offset_right = 970.0
+offset_bottom = 369.0
+text = "購買"
+metadata/action = "purchase_siumai"
+
+[node name="Title_fish" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 390.0
+offset_right = 740.0
+offset_bottom = 418.0
+text = "（增）魚蛋設備"
+theme_override_font_sizes/font_size = 23
+
+[node name="Desc_fish" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 421.0
+offset_right = 775.0
+offset_bottom = 448.0
+text = "辣／原味兩槽；逐顆煮六秒，竹籤串三顆"
+theme_override_font_sizes/font_size = 18
+
+[node name="Buy_fish" type="Button" parent="Sheet"]
+offset_left = 800.0
+offset_top = 390.0
+offset_right = 970.0
+offset_bottom = 444.0
+text = "購買"
+metadata/action = "purchase_fish"
+
+[node name="Title_fish_fast" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 465.0
+offset_right = 740.0
+offset_bottom = 493.0
+text = "（速）魚蛋快速補料"
+theme_override_font_sizes/font_size = 23
+
+[node name="Desc_fish_fast" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 496.0
+offset_right = 775.0
+offset_bottom = 523.0
+text = "拖原料即可補滿目標槽；需先解鎖魚蛋"
+theme_override_font_sizes/font_size = 18
+
+[node name="Buy_fish_fast" type="Button" parent="Sheet"]
+offset_left = 800.0
+offset_top = 465.0
+offset_right = 970.0
+offset_bottom = 519.0
+text = "購買"
+metadata/action = "purchase_fish_fast"
+
+[node name="Note" type="Label" parent="Sheet"]
+offset_left = 40.0
+offset_top = 555.0
+offset_right = 970.0
+offset_bottom = 585.0
+text = "測試價格可調；已購入設備永久保留，食物每日重置。"
+theme_override_font_sizes/font_size = 17
+
+[node name="Return" type="Button" parent="."]
+offset_left = 490.0
+offset_top = 635.0
+offset_right = 790.0
+offset_bottom = 683.0
+text = "返回選關"
+metadata/action = "show_map"
+
+[node name="Juice" parent="Sheet/Buy_egg_fast" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Sheet/Buy_auto_tea" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Sheet/Buy_jelly" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Sheet/Buy_siumai" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Sheet/Buy_fish" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Sheet/Buy_fish_fast" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Return" instance=ExtResource("ui_juice")]
+
+[node name="EntranceJuice" parent="Sheet" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.000
+
+[node name="EntranceJuice" parent="Sheet/Title_egg_fast" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.045
+
+[node name="EntranceJuice" parent="Sheet/Title_auto_tea" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.090
+
+[node name="EntranceJuice" parent="Sheet/Title_jelly" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.135
+
+[node name="EntranceJuice" parent="Sheet/Title_siumai" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.180
+
+[node name="EntranceJuice" parent="Sheet/Title_fish" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.225
+
+[node name="EntranceJuice" parent="Sheet/Title_fish_fast" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.270
+
+[node name="ValueJuice" parent="Sheet/Money" instance=ExtResource("ui_juice")]
+mode = 2

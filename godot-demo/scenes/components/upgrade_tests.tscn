@@ -1,0 +1,123 @@
+[gd_scene format=3]
+[ext_resource type="Theme" path="res://ui/theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://scenes/components/ui_juice.tscn" id="ui_juice"]
+
+[sub_resource type="StyleBoxFlat" id="Paper"]
+bg_color = Color(1,0.97,0.86,0.98)
+border_width_left = 2
+border_width_right = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.55,0.27,0.18,1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+
+[node name="UpgradeTests" type="Control"]
+offset_left = 15.0
+offset_top = 650.0
+offset_right = 1265.0
+offset_bottom = 710.0
+theme = ExtResource("theme")
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="."]
+offset_left = 0.0
+offset_top = -25.0
+offset_right = 1200.0
+offset_bottom = -1.0
+text = "升級測試入口（不保存金錢／升級／天數）"
+theme_override_font_sizes/font_size = 17
+
+[node name="Test_base" type="Button" parent="."]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 148.0
+offset_bottom = 46.0
+text = "基礎配置"
+theme_override_font_sizes/font_size = 17
+metadata/action = "test_base"
+
+[node name="Test_egg_fast" type="Button" parent="."]
+offset_left = 156.0
+offset_top = 0.0
+offset_right = 304.0
+offset_bottom = 46.0
+text = "蛋提速"
+theme_override_font_sizes/font_size = 17
+metadata/action = "test_egg_fast"
+
+[node name="Test_auto_tea" type="Button" parent="."]
+offset_left = 312.0
+offset_top = 0.0
+offset_right = 460.0
+offset_bottom = 46.0
+text = "五茶自動"
+theme_override_font_sizes/font_size = 17
+metadata/action = "test_auto_tea"
+
+[node name="Test_jelly" type="Button" parent="."]
+offset_left = 468.0
+offset_top = 0.0
+offset_right = 616.0
+offset_bottom = 46.0
+text = "龜苓膏"
+theme_override_font_sizes/font_size = 17
+metadata/action = "test_jelly"
+
+[node name="Test_siumai" type="Button" parent="."]
+offset_left = 624.0
+offset_top = 0.0
+offset_right = 772.0
+offset_bottom = 46.0
+text = "燒賣"
+theme_override_font_sizes/font_size = 17
+metadata/action = "test_siumai"
+
+[node name="Test_fish" type="Button" parent="."]
+offset_left = 780.0
+offset_top = 0.0
+offset_right = 928.0
+offset_bottom = 46.0
+text = "魚蛋"
+theme_override_font_sizes/font_size = 17
+metadata/action = "test_fish"
+
+[node name="Test_fish_fast" type="Button" parent="."]
+offset_left = 936.0
+offset_top = 0.0
+offset_right = 1084.0
+offset_bottom = 46.0
+text = "魚蛋快補"
+theme_override_font_sizes/font_size = 17
+metadata/action = "test_fish_fast"
+
+[node name="Test_all" type="Button" parent="."]
+offset_left = 1092.0
+offset_top = 0.0
+offset_right = 1240.0
+offset_bottom = 46.0
+text = "全部升級"
+theme_override_font_sizes/font_size = 17
+metadata/action = "test_all"
+
+[node name="Juice" parent="Test_base" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Test_egg_fast" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Test_auto_tea" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Test_jelly" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Test_siumai" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Test_fish" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Test_fish_fast" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="Test_all" instance=ExtResource("ui_juice")]
+
+[node name="EntranceJuice" parent="Title" instance=ExtResource("ui_juice")]
+mode = 1
+delay = 0.000

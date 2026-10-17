@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://cnusm7mpgcda3"]
+[ext_resource type="Material" path="res://ui/sun_backlight.tres" id="sun_backlight"]
+
+
+[ext_resource type="Shader" uid="uid://xxj3tlkr1sm7" path="res://scripts/contact_shadow.gdshader" id="4_8qsng"]
+[ext_resource type="PackedScene" uid="uid://bw2vadd0xd788" path="res://scenes/components/contact_shadow.tscn" id="contact_shadow"]
+[ext_resource type="Texture2D" uid="uid://c0p8hx1o5cqab" path="res://assets/upgrade-foods.png" id="foods"]
+[ext_resource type="FontFile" uid="uid://g12wugvwtk8a" path="res://assets/fonts/Iansui-Regular.ttf" id="label_font"]
+[ext_resource type="PackedScene" path="res://scenes/components/equipment_label_frame.tscn" id="plaque"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="theme"]
+
+[sub_resource type="AtlasTexture" id="Food0"]
+atlas = ExtResource("foods")
+region = Rect2(55, 15, 365, 425)
+filter_clip = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_45dtr"]
+resource_local_to_scene = true
+shader = ExtResource("4_8qsng")
+shader_parameter/shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 1)
+shader_parameter/contact_center = Vector2(0.5, 0.83)
+shader_parameter/contact_radius = Vector2(0.43, 0.065)
+shader_parameter/lift = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mvtr8"]
+resource_local_to_scene = true
+shader = ExtResource("4_8qsng")
+shader_parameter/shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 1)
+shader_parameter/contact_center = Vector2(0.5, 0.83)
+shader_parameter/contact_radius = Vector2(0.43, 0.065)
+shader_parameter/lift = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s1m6r"]
+resource_local_to_scene = true
+shader = ExtResource("4_8qsng")
+shader_parameter/shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 1)
+shader_parameter/contact_center = Vector2(0.5, 0.83)
+shader_parameter/contact_radius = Vector2(0.43, 0.065)
+shader_parameter/lift = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4y60f"]
+resource_local_to_scene = true
+shader = ExtResource("4_8qsng")
+shader_parameter/shadow_color = Color(0.2509804, 0.12941177, 0.06666667, 1)
+shader_parameter/contact_center = Vector2(0.5, 0.83)
+shader_parameter/contact_radius = Vector2(0.43, 0.065)
+shader_parameter/lift = 0.0
+
+[node name="Jelly" type="Control" unique_id=1076809927]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 260.0
+offset_bottom = 90.0
+mouse_filter = 2
+theme = ExtResource("theme")
+metadata/_edit_group_ = true
+
+[node name="Item0" type="TextureRect" parent="." unique_id=1544425522]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_right = 57.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = SubResource("Food0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContactShadow" parent="Item0" unique_id=286524345 instance=ExtResource("contact_shadow")]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_45dtr")
+layout_mode = 0
+offset_right = 57.0
+offset_bottom = 72.0
+target_visual = NodePath("..")
+contact_center = Vector2(0.5, 0.83)
+
+[node name="Item1" type="TextureRect" parent="." unique_id=1198286728]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 62.0
+offset_right = 119.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = SubResource("Food0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContactShadow" parent="Item1" unique_id=864409835 instance=ExtResource("contact_shadow")]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_mvtr8")
+layout_mode = 0
+offset_right = 57.0
+offset_bottom = 72.0
+target_visual = NodePath("..")
+contact_center = Vector2(0.5, 0.83)
+
+[node name="Item2" type="TextureRect" parent="." unique_id=2033621501]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 124.0
+offset_right = 181.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = SubResource("Food0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContactShadow" parent="Item2" unique_id=1233852418 instance=ExtResource("contact_shadow")]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_s1m6r")
+layout_mode = 0
+offset_right = 57.0
+offset_bottom = 72.0
+target_visual = NodePath("..")
+contact_center = Vector2(0.5, 0.83)
+
+[node name="Item3" type="TextureRect" parent="." unique_id=1764638635]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 186.0
+offset_right = 243.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = SubResource("Food0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContactShadow" parent="Item3" unique_id=1478658500 instance=ExtResource("contact_shadow")]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_4y60f")
+layout_mode = 0
+offset_right = 57.0
+offset_bottom = 72.0
+target_visual = NodePath("..")
+contact_center = Vector2(0.5, 0.83)
+
+[node name="Status" type="Label" parent="." unique_id=1145924255]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 65.0
+offset_right = 271.0
+offset_bottom = 93.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.06, 1)
+theme_override_fonts/font = ExtResource("label_font")
+theme_override_font_sizes/font_size = 16
+text = "龜苓膏 4 / 4"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Status" unique_id=1390269358 instance=ExtResource("plaque")]
+layout_mode = 0
+anchors_preset = 0

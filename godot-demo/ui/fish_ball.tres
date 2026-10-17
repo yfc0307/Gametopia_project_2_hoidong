@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3]
+[ext_resource type="Texture2D" path="res://assets/upgrade-foods.png" id="atlas"]
+[resource]
+atlas = ExtResource("atlas")
+region = Rect2(490, 505, 320, 315)
+filter_clip = true
+

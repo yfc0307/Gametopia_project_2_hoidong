@@ -1,0 +1,350 @@
+[gd_scene format=3 uid="uid://c43jtrjd0e0s0"]
+
+[ext_resource type="FontFile" uid="uid://dnt4ecgggc5o1" path="res://assets/fonts/jf-openhuninn-2.1.ttf" id="hud_font"]
+[ext_resource type="Script" uid="uid://bilfc0b4q1xpa" path="res://scripts/hud_wave.gd" id="hud_wave"]
+[ext_resource type="Script" uid="uid://bgjfnexjauosp" path="res://scripts/hud_wave_effect.gd" id="hud_wave_effect"]
+[ext_resource type="Script" uid="uid://bd7e3nf6dmqfo" path="res://scripts/revenue_number.gd" id="revenue_number"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="theme"]
+[ext_resource type="PackedScene" uid="uid://dqpbd1j13xto5" path="res://scenes/components/ui_juice.tscn" id="ui_juice"]
+[ext_resource type="Script" uid="uid://cngi0gn6clv5y" path="res://scripts/wave_label.gd" id="wave_label"]
+
+[sub_resource type="RichTextEffect" id="MoneyWave"]
+resource_local_to_scene = true
+script = ExtResource("hud_wave_effect")
+
+[sub_resource type="RichTextEffect" id="TimerWave"]
+resource_local_to_scene = true
+script = ExtResource("hud_wave_effect")
+
+[sub_resource type="RichTextEffect" id="OrdersWave"]
+resource_local_to_scene = true
+script = ExtResource("hud_wave_effect")
+
+[sub_resource type="StyleBoxFlat" id="Card"]
+bg_color = Color(0.98, 0.98, 0.95, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.02, 0.18, 0.12, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="Coin"]
+bg_color = Color(0.96, 0.63, 0.12, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="Green"]
+bg_color = Color(0, 0.36, 0.24, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="FontVariation" id="HUDBold"]
+base_font = ExtResource("hud_font")
+variation_embolden = 0.35
+
+[node name="HUD" type="Control" unique_id=202471465]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1250.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme = ExtResource("theme")
+script = ExtResource("hud_wave")
+wave_speed = 6.0
+money_wave = SubResource("MoneyWave")
+timer_wave = SubResource("TimerWave")
+orders_wave = SubResource("OrdersWave")
+
+[node name="MoneyCard" type="Panel" parent="." unique_id=555078634]
+layout_mode = 0
+offset_right = 230.0
+offset_bottom = 54.0
+scale = Vector2(0.85, 0.85)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Coin" type="Panel" parent="MoneyCard" unique_id=1584174563]
+visible = false
+layout_mode = 0
+offset_left = 35.294117
+offset_top = 17.647057
+offset_right = 53.294117
+offset_bottom = 35.647057
+scale = Vector2(0.85, 0.85)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Coin")
+
+[node name="TitlePanel" type="Panel" parent="MoneyCard" unique_id=747317676]
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Green")
+
+[node name="TimerCard" type="Panel" parent="." unique_id=1628430366]
+layout_mode = 0
+offset_left = 490.0
+offset_right = 730.0
+offset_bottom = 54.0
+scale = Vector2(0.85, 0.85)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Card")
+
+[node name="TitlePanel" type="Panel" parent="TimerCard" unique_id=1408965561]
+layout_mode = 0
+offset_right = 122.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Green")
+
+[node name="OrdersCard" type="Panel" parent="." unique_id=40725632]
+layout_mode = 0
+offset_left = 1000.0
+offset_right = 1180.0
+offset_bottom = 54.0
+scale = Vector2(0.85, 0.85)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Card")
+
+[node name="TitlePanel" type="Panel" parent="OrdersCard" unique_id=1386507875]
+layout_mode = 0
+offset_right = 76.0
+offset_bottom = 54.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Green")
+
+[node name="Money" type="RichTextLabel" parent="." unique_id=148965899]
+clip_contents = false
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 54.0
+scale = Vector2(0.85, 0.85)
+focus_mode = 0
+theme_override_colors/default_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("HUDBold")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[hudwave]營業額[/hudwave]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("MoneyWave")]
+script = ExtResource("wave_label")
+
+[node name="Amount" type="RichTextLabel" parent="Money" unique_id=1653152963]
+clip_contents = false
+layout_mode = 0
+offset_left = 158.58823
+offset_right = 242.58823
+offset_bottom = 54.0
+focus_mode = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("HUDBold")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[hudwave]0[/hudwave]"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+custom_effects = [SubResource("MoneyWave")]
+script = ExtResource("revenue_number")
+
+[node name="Currency" type="RichTextLabel" parent="Money" unique_id=1424858559]
+clip_contents = false
+layout_mode = 0
+offset_left = 130.58823
+offset_right = 152.58823
+offset_bottom = 54.0
+focus_mode = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("HUDBold")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[hudwave]$[/hudwave]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("MoneyWave")]
+script = ExtResource("wave_label")
+
+[node name="Timer" type="RichTextLabel" parent="." unique_id=457858780]
+clip_contents = false
+layout_mode = 0
+offset_left = 490.0
+offset_right = 612.0
+offset_bottom = 54.0
+scale = Vector2(0.85, 0.85)
+focus_mode = 0
+theme_override_colors/default_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("HUDBold")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[hudwave]時間剩餘[/hudwave]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("TimerWave")]
+script = ExtResource("wave_label")
+
+[node name="Value" type="RichTextLabel" parent="Timer" unique_id=1158097528]
+clip_contents = false
+layout_mode = 0
+offset_left = 124.0
+offset_right = 236.0
+offset_bottom = 54.0
+focus_mode = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("HUDBold")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "[hudwave]03:00[/hudwave]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("TimerWave")]
+script = ExtResource("wave_label")
+
+[node name="Orders" type="Label" parent="." unique_id=1690240529]
+layout_mode = 0
+offset_left = 1000.0
+offset_right = 1180.0
+offset_bottom = 54.0
+scale = Vector2(0.85, 0.85)
+theme_override_colors/font_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("HUDBold")
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CompletedTitle" type="RichTextLabel" parent="Orders" unique_id=1115138155]
+clip_contents = false
+layout_mode = 0
+offset_right = 76.0
+offset_bottom = 27.0
+focus_mode = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("HUDBold")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[hudwave]完成[/hudwave]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("OrdersWave")]
+script = ExtResource("wave_label")
+
+[node name="IncompleteTitle" type="RichTextLabel" parent="Orders" unique_id=537099347]
+clip_contents = false
+layout_mode = 0
+offset_top = 27.0
+offset_right = 76.0
+offset_bottom = 54.0
+focus_mode = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("HUDBold")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[hudwave]離開[/hudwave]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("OrdersWave")]
+script = ExtResource("wave_label")
+
+[node name="Completed" type="RichTextLabel" parent="Orders" unique_id=954942352]
+clip_contents = false
+layout_mode = 0
+offset_left = 78.0
+offset_right = 176.0
+offset_bottom = 27.0
+focus_mode = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("HUDBold")
+theme_override_font_sizes/normal_font_size = 23
+bbcode_enabled = true
+text = "[hudwave]0[/hudwave]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("OrdersWave")]
+script = ExtResource("wave_label")
+
+[node name="Incomplete" type="RichTextLabel" parent="Orders" unique_id=506766366]
+clip_contents = false
+layout_mode = 0
+offset_left = 78.0
+offset_top = 27.0
+offset_right = 176.0
+offset_bottom = 54.0
+focus_mode = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("HUDBold")
+theme_override_font_sizes/normal_font_size = 23
+bbcode_enabled = true
+text = "[hudwave]0[/hudwave]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("OrdersWave")]
+script = ExtResource("wave_label")
+
+[node name="Pause" type="Button" parent="." unique_id=1773544599]
+layout_mode = 0
+offset_left = 1196.0
+offset_right = 1250.0
+offset_bottom = 54.0
+scale = Vector2(0.85, 0.85)
+tooltip_text = "暫停（ESC）"
+theme_override_colors/font_color = Color(1, 1, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("HUDBold")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("Green")
+theme_override_styles/pressed = SubResource("Green")
+theme_override_styles/hover = SubResource("Green")
+text = "Ⅱ"
+metadata/action = "toggle_pause"
+
+[node name="Juice" parent="Pause" unique_id=404686882 instance=ExtResource("ui_juice")]

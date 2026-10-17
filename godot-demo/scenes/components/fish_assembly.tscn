@@ -1,0 +1,127 @@
+[gd_scene format=3]
+[ext_resource type="Material" path="res://ui/sun_backlight.tres" id="sun_backlight"]
+
+
+[ext_resource type="Texture2D" uid="uid://c0p8hx1o5cqab" path="res://assets/upgrade-foods.png" id="foods"]
+[ext_resource type="FontFile" uid="uid://g12wugvwtk8a" path="res://assets/fonts/Iansui-Regular.ttf" id="label_font"]
+[ext_resource type="PackedScene" path="res://scenes/components/equipment_label_frame.tscn" id="plaque"]
+[ext_resource type="Theme" uid="uid://y3hmol4tvjx2" path="res://ui/theme.tres" id="theme"]
+[sub_resource type="AtlasTexture" id="Food5"]
+atlas = ExtResource("foods")
+region = Rect2(490, 505, 320, 315)
+filter_clip = true
+
+[sub_resource type="StyleBoxFlat" id="DropHighlight"]
+bg_color = Color(0.7, 0.8, 0.4, 0.08)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.82, 0.73, 0.34, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="AtlasTexture" id="Food6"]
+atlas = ExtResource("foods")
+region = Rect2(890, 465, 445, 365)
+filter_clip = true
+
+[node name="Assembly" type="Control" unique_id=1144489802]
+anchors_preset = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 115.0
+offset_bottom = 80.0
+mouse_filter = 2
+
+theme = ExtResource("theme")
+metadata/_edit_group_ = true
+
+[node name="Skewer" type="TextureRect" parent="." unique_id=488024026]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 5.0
+offset_right = 105.0
+offset_bottom = 48.0
+mouse_filter = 2
+texture = SubResource("Food6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball0" type="TextureRect" parent="." unique_id=1409070568]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 33.0
+offset_top = 19.0
+offset_right = 57.0
+offset_bottom = 43.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball1" type="TextureRect" parent="." unique_id=529678133]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 51.0
+offset_top = 5.0
+offset_right = 75.0
+offset_bottom = 29.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ball2" type="TextureRect" parent="." unique_id=1723279196]
+light_mask = 3
+material = ExtResource("sun_backlight")
+layout_mode = 0
+offset_left = 69.0
+offset_top = -8.0
+offset_right = 93.0
+offset_bottom = 16.0
+mouse_filter = 2
+texture = SubResource("Food5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Status" type="Label" parent="." unique_id=1336614966]
+layout_mode = 0
+offset_top = 50.0
+offset_right = 115.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.06, 1)
+theme_override_fonts/font = ExtResource("label_font")
+theme_override_font_sizes/font_size = 16
+text = "裝填位"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Frame" parent="Status" unique_id=499666889 instance=ExtResource("plaque")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 19.0
+offset_top = 0.0
+offset_right = 94.0
+offset_bottom = 31.0
+metadata/_edit_lock_ = true
+
+[node name="Highlight" type="Panel" parent="." unique_id=106674251]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("DropHighlight")
+

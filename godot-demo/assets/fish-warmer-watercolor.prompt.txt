@@ -1,0 +1,3 @@
+Built-in ImageGen, 2026-10-14.
+Prompt: Hong Kong hand-painted watercolor recessed stainless steel fish-ball warmer, two side-by-side wells, clear golden broth left / amber curry broth right. Transparent exterior, opaque liquid, shallow frontal overhead perspective, shared stainless rim. No fish balls, utensils, text or surrounding counter. Reference: user's commercial inset warmer photograph; match existing warm watercolor game art.
+Applied in fish_station.tscn / WarmerArt. Fish balls, labels, hitboxes and stock remain separate native nodes.

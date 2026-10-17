@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dqpbd1j13xto5"]
+
+[ext_resource type="Script" uid="uid://clgp5k5dsqcj2" path="res://scripts/ui_juice.gd" id="script"]
+
+[node name="Juice" type="Node" unique_id=48118896]
+script = ExtResource("script")
+tilt_degrees = 3.0

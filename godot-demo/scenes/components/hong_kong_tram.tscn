@@ -1,0 +1,27 @@
+[gd_scene format=3]
+[ext_resource type="Texture2D" path="res://assets/hong-kong-tram-watercolor.png" id="art"]
+[ext_resource type="Shader" path="res://scripts/sun_backlight.gdshader" id="shader"]
+[ext_resource type="PackedScene" path="res://scenes/components/customer_sun_occluder.tscn" id="occluder"]
+[sub_resource type="ShaderMaterial" id="backlight"]
+shader = ExtResource("shader")
+shader_parameter/rim_strength = 3.0
+shader_parameter/rim_width = 12.0
+shader_parameter/face_brightness = 0.90
+[node name="Tram" type="Control"]
+offset_left = 180.0
+offset_top = -25.0
+offset_right = 620.0
+offset_bottom = 195.0
+mouse_filter = 2
+metadata/_edit_group_ = true
+[node name="Art" type="TextureRect" parent="."]
+light_mask = 3
+material = SubResource("backlight")
+offset_right = 440.0
+offset_bottom = 220.0
+mouse_filter = 2
+texture = ExtResource("art")
+expand_mode = 1
+stretch_mode = 5
+[node name="SunOccluder" parent="Art" instance=ExtResource("occluder")]
+window_clip = NodePath("../../../..")

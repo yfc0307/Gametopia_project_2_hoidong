@@ -1,0 +1,32 @@
+extends SceneTree
+func _init() -> void:
+	call_deferred("run")
+func run() -> void:
+	var ui = load("res://main.tscn").instantiate();root.add_child(ui);ui.set_process(false)
+	ui.save_path="user://shadow_visibility_test_only.json";ui.start_upgrade_test(["jelly","siumai"]);ui.paused=false;ui.sync_ui();await process_frame
+	var kettle = ui.get_node("Shop/Kettles/Kettle0/Design")
+	assert(kettle.get_node("ContactShadow").is_visible_in_tree())
+	ui.drag="kettle";ui.drag_tea=0;ui.sync_ui()
+	assert(not kettle.get_node("Art").visible and not kettle.get_node("ContactShadow").visible)
+	assert(ui.get_node("Shop/Effects/DragGhost/ContactShadow").is_visible_in_tree())
+	ui.game.place_bowl();ui.finish_drag(ui.fill_zone.get_center());assert(ui.game.bowl=="pouring")
+	assert(not kettle.get_node("ContactShadow").visible)
+	ui.game.tick(1.2);ui.sync_ui();assert(kettle.get_node("ContactShadow").visible)
+	var bowl = ui.get_node("Shop/FillingSlot/Design/FullBowl")
+	assert(bowl.get_node("ContactShadow").is_visible_in_tree())
+	ui.drag="tea";ui.sync_ui();assert(not bowl.get_node("ContactShadow").is_visible_in_tree())
+	ui.finish_drag(Vector2(-100,-100));assert(ui.return_time>0)
+	assert(not bowl.visible and not bowl.get_node("ContactShadow").is_visible_in_tree())
+	ui.return_time=0;ui.return_item="";ui.sync_ui();assert(bowl.get_node("ContactShadow").is_visible_in_tree())
+	ui.drag="tea";ui.finish_drag(ui.bin_zone.get_center());assert(ui.game.bowl=="absent")
+	assert(not bowl.get_node("ContactShadow").is_visible_in_tree())
+	var raw_shadow = ui.get_node("Shop/EggSupply/Design/ContactShadow")
+	assert(ui.game.cook());ui.sync_ui();assert(not raw_shadow.visible)
+	assert(ui.game.restock());ui.game.tick(ui.cfg.restock_seconds);ui.sync_ui();assert(raw_shadow.visible)
+	ui.game.jelly=0;ui.game.siumai=0;ui.sync_ui()
+	assert(not ui.get_node("Shop/UpgradeStations/Jelly/Item0/ContactShadow").is_visible_in_tree())
+	for shadow in get_nodes_in_group("contact_shadows"):
+		assert(shadow.is_visible_in_tree() == shadow.get_target().is_visible_in_tree(), "all existing shadows follow their assigned visual")
+	assert(ui.get_node("Shop/UpgradeStations/Siumai/Basket/ContactShadow").is_visible_in_tree(),"empty basket remains on table")
+	print("PASS: pickup, pouring, consumption, bounce return, restock, sold-out food and remaining container shadows")
+	quit()
