@@ -207,6 +207,15 @@ offset_bottom = 628.0
 text = "音效：開"
 metadata/action = "toggle_sound"
 
+[node name="CustomiseSound" type="Button" parent="."]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 128.0
+offset_right = 1210.0
+offset_bottom = 182.0
+text = "自訂音效"
+metadata/action = "show_sound_studio"
+
 [node name="ProgressPanel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 490.0
@@ -261,6 +270,8 @@ text = "首輪先驗證營業循環；升級下一階段接入。"
 [node name="Juice" parent="Help" instance=ExtResource("ui_juice")]
 
 [node name="Juice" parent="Sound" instance=ExtResource("ui_juice")]
+
+[node name="Juice" parent="CustomiseSound" instance=ExtResource("ui_juice")]
 
 [node name="EntranceJuice" parent="Brand" instance=ExtResource("ui_juice")]
 mode = 1
