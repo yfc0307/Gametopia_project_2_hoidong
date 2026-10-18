@@ -43,6 +43,7 @@ var save_error := ""
 @onready var quip_label: Label = $Shop.find_child("Quip", true, false) as Label
 var muted := false
 var audio: AudioStreamPlayer
+var sound_bank: Node
 
 # Layout is authored in scenes/pages and scenes/components. These getters never overwrite node transforms.
 var egg_zone: Rect2:
@@ -72,6 +73,8 @@ func customer_rect(i: int) -> Rect2:
 func _ready() -> void:
 	cfg = JSON.parse_string(FileAccess.get_file_as_string("res://config/balance.json"))
 	audio = $Audio
+	if sound_bank == null: sound_bank = $SoundBank
+	$SoundStudio.back_requested.connect(show_map)
 	for b in find_children("*", "Button", true, false):
 		if b.has_meta("action"): b.pressed.connect(_on_action.bind(str(b.get_meta("action"))))
 	load_progress()
@@ -92,6 +95,7 @@ func capture(tag: String) -> void:
 	get_tree().quit()
 
 func show_map() -> void:
+	$SoundStudio.close()
 	if test_mode:
 		game = null
 		test_mode = false
@@ -101,15 +105,29 @@ func show_map() -> void:
 	sync_ui()
 
 func show_help() -> void:
+	$SoundStudio.close()
 	screen = "help"
 	sync_ui()
 
 func show_upgrades() -> void:
+	$SoundStudio.close()
 	screen = "upgrades"
 	sync_ui()
 
 func toggle_sound() -> void:
 	muted = not muted
+	if muted:
+		audio.stop()
+		sound_bank.stop_playback()
+	sync_ui()
+
+func show_sound_studio() -> void:
+	if screen != "map": return
+	cancel_drag()
+	audio.stop()
+	sound_bank.stop_playback()
+	screen = "sound_studio"
+	$SoundStudio.open(sound_bank)
 	sync_ui()
 
 func start_day() -> void:
@@ -118,6 +136,7 @@ func start_day() -> void:
 	start_session(owned_upgrades)
 
 func start_session(keys: Array) -> void:
+	$SoundStudio.close()
 	screen = "shop"
 	paused = false
 	cancel_drag()
@@ -136,6 +155,7 @@ func start_session(keys: Array) -> void:
 	$Shop/Effects/CustomerFeedback.clear()
 	$Shop/HUD/Money/Amount.set_amount(0, true)
 	game.start()
+	sound("shop_open")
 	toast = "拖碗 → 裝填位 → 拖水壺倒茶；拖六蛋入爐。"
 	if "auto_tea" in keys: toast = "每壺前方直接取茶；交付或丟棄後才自動補碗。"
 	if "fish" in keys: toast = "魚蛋入槽煮熟 → 拖竹籤到裝填位 → 點熟魚蛋 → 拖給顧客。"
@@ -177,7 +197,25 @@ func _process(delta: float) -> void:
 			if return_pos.distance_to(drag_origin) < 0.8: return_time = 0.0
 	if screen == "shop" and not paused:
 		var was_pouring: bool = game.bowl == "pouring"
+		var was_cooking: bool = game.pot == "cooking"
+		var was_assembling: bool = game.fish_in_machine
+		var auto_pouring: Array = []
+		for slot in game.auto_slots: auto_pouring.append(slot.state == "pouring")
+		var present_customers: Array = []
+		for customer in game.customers: present_customers.append(customer.present)
 		game.tick(delta)
+		if game.active:
+			var tea_finished: bool = was_pouring and game.bowl == "full"
+			if game.has_upgrade("auto_tea"):
+				for i in range(game.auto_slots.size()):
+					if auto_pouring[i] and game.auto_slots[i].state == "full": tea_finished = true
+			if tea_finished: sound("tea_ready")
+			if was_cooking and game.pot == "ready": sound("egg_ready")
+			if was_assembling and not game.fish_in_machine and game.skewer_count > 0: sound("skewer_ready")
+			for i in range(game.customers.size()):
+				if not present_customers[i] and game.customers[i].present:
+					sound("customer_arrive")
+					break
 		if was_pouring and game.bowl == "full":
 			return_item = "kettle"
 			return_pos = fill_zone.get_center() + Vector2(-50, -57)
@@ -193,11 +231,12 @@ func _process(delta: float) -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and screen == "shop" and not paused: toggle_pause()
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and screen == "sound_studio": $SoundStudio.handle_focus_lost()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		if screen == "shop": toggle_pause()
-		elif screen in ["help", "upgrades"]: show_map()
+		elif screen in ["help", "upgrades", "sound_studio"]: show_map()
 		get_viewport().set_input_as_handled()
 
 func _input(event: InputEvent) -> void:
@@ -209,8 +248,9 @@ func _input(event: InputEvent) -> void:
 
 func sync_ui() -> void:
 	if not is_node_ready(): return
-	for name in ["Map", "Shop", "Summary", "Help", "Upgrades"]:
-		get_node(name).visible = (name.to_lower() == screen or name == "Shop" and screen == "closing")
+	for page_name in ["Map", "Shop", "Summary", "Help", "Upgrades"]:
+		get_node(page_name).visible = (page_name.to_lower() == screen or page_name == "Shop" and screen == "closing")
+	$SoundStudio.visible = screen == "sound_studio"
 	$Shop/WindowSunlight.set_frozen(paused or screen != "shop")
 	$Shop/HUD.set_frozen(paused or screen != "shop")
 	$Shop/Effects/CustomerFeedback.set_frozen(paused or screen != "shop")
@@ -485,6 +525,7 @@ func finish_drag(p: Vector2) -> void:
 		return_pos = drag_visual_pos
 		return_time = 1.0
 	if not accepted and drag == "tea" and game.has_upgrade("auto_tea"): game.return_auto()
+	if accepted and drag == "tea" and game.has_upgrade("auto_tea"): sound("tea_pour")
 	if not accepted: sound("drop_return")
 	else: sound("drop_valid")
 	drag = ""
@@ -501,22 +542,8 @@ func hint(message: String) -> void:
 	toast_left = 2.4
 
 func sound(id: String) -> void:
-	# Stable event IDs are the integration boundary for Jack's recording module.
-	if muted: return
-	var rates := {"tea_pour": 520.0, "egg_cook": 240.0, "order_paid": 880.0, "phone_restock": 660.0, "day_closed": 330.0}
-	var rate: float = rates.get(id, 420.0)
-	var stream := AudioStreamWAV.new()
-	stream.format = AudioStreamWAV.FORMAT_16_BITS
-	stream.mix_rate = 22050
-	var data := PackedByteArray()
-	var count := 2205
-	data.resize(count * 2)
-	for i in range(count):
-		var sample := int(sin(TAU * rate * i / 22050.0) * 1400 * (1.0 - float(i) / count))
-		data.encode_s16(i * 2, sample)
-	stream.data = data
-	audio.stream = stream
-	audio.play()
+	if muted or not is_instance_valid(sound_bank): return
+	sound_bank.play(id)
 
 func sync_purchase_buttons() -> void:
 	for key in UPGRADE_IDS:
@@ -534,6 +561,7 @@ func purchase_upgrade(key: String) -> void:
 	money -= price
 	owned_upgrades.append(key)
 	upgrade_protection = true
+	sound("upgrade_buy")
 	save_progress()
 	sync_ui()
 
@@ -618,7 +646,8 @@ func begin_upgrade_drag(p: Vector2) -> bool:
 		for lane in range(2):
 			for i in range(game.lanes[lane].size()):
 				if game.lanes[lane][i] <= 0 and rect_of("Shop/UpgradeStations/Fish/Boiler/Lane%d/Ball%d" % [lane, i]).has_point(p):
-					if not game.spear_fish(lane, i): hint("先放竹籤；同一籤只可裝同一口味，最多三顆。")
+					if game.spear_fish(lane, i): sound("fish_spear")
+					else: hint("先放竹籤；同一籤只可裝同一口味，最多三顆。")
 					return true
 	var item := ""
 	var source: Control
@@ -660,7 +689,10 @@ func valid_upgrade_drop(p: Vector2) -> bool:
 func finish_upgrade_drop(p: Vector2) -> bool:
 	if drag == "new_skewer": return game.place_skewer()
 	for lane in range(2):
-		if rect_of("Shop/UpgradeStations/Fish/Boiler/Lane%d" % lane).has_point(p): return game.add_fish(lane)
+		if rect_of("Shop/UpgradeStations/Fish/Boiler/Lane%d" % lane).has_point(p):
+			var accepted: bool = game.add_fish(lane)
+			if accepted: sound("fish_cook")
+			return accepted
 	return false
 
 func purchase_egg_fast() -> void:

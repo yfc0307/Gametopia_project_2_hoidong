@@ -9,5 +9,7 @@ backups/
 godot-demo/tests/*.png
 godot-demo/tests/*.jpg
 godot-demo/tests/*.json
+godot-demo/tests/artifacts/*
+!godot-demo/tests/artifacts/.gdignore
 .DS_Store
 Thumbs.db

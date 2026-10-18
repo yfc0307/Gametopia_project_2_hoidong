@@ -1,0 +1,504 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Theme" path="res://ui/theme.tres" id="theme"]
+[ext_resource type="Script" path="res://scripts/sound_studio.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/components/sound_effect_row.tscn" id="row"]
+
+[sub_resource type="StyleBoxFlat" id="Paper"]
+bg_color = Color(1, 0.973, 0.91, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65, 0.67, 0.55, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+
+[sub_resource type="StyleBoxFlat" id="Sage"]
+bg_color = Color(0.9, 0.92, 0.82, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65, 0.67, 0.55, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+
+[sub_resource type="StyleBoxFlat" id="RecordButton"]
+bg_color = Color(0.7, 0.31, 0.23, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+
+[sub_resource type="StyleBoxFlat" id="Device"]
+bg_color = Color(0.94, 0.94, 0.86, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.62, 0.5, 1)
+content_margin_left = 12.0
+content_margin_right = 28.0
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+
+[node name="SoundStudio" type="Control"]
+offset_right = 1280.0
+offset_bottom = 720.0
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Wash" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.93, 0.90, 0.79, 1)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 22.0
+offset_right = 910.0
+offset_bottom = 66.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 34
+text = "開檔 · 自訂音效"
+
+[node name="Subtitle" type="Label" parent="."]
+offset_left = 34.0
+offset_top = 74.0
+offset_right = 1005.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "為街坊小店加上你的聲音：揀選音效、錄音、試聽，再儲存。"
+
+[node name="Back" type="Button" parent="."]
+offset_left = 1044.0
+offset_top = 28.0
+offset_right = 1248.0
+offset_bottom = 78.0
+mouse_default_cursor_shape = 2
+text = "返回關卡選擇"
+
+[node name="Sheet" type="Control" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+
+[node name="Sidebar" type="Panel" parent="Sheet"]
+offset_left = 32.0
+offset_top = 118.0
+offset_right = 300.0
+offset_bottom = 674.0
+theme_override_styles/panel = SubResource("Paper")
+
+[node name="Count" type="Label" parent="Sheet/Sidebar"]
+offset_left = 20.0
+offset_top = 14.0
+offset_right = 248.0
+offset_bottom = 44.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 21
+text = "全部 21 個音效"
+
+[node name="PickAnother" type="Button" parent="Sheet/Sidebar"]
+offset_left = 16.0
+offset_top = 54.0
+offset_right = 252.0
+offset_bottom = 102.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 18
+text = "換一個 · Pick Another"
+tooltip_text = "隨機選另一個音效；未儲存的錄音會捨棄。"
+
+[node name="Scroll" type="ScrollContainer" parent="Sheet/Sidebar"]
+offset_left = 16.0
+offset_top = 116.0
+offset_right = 252.0
+offset_bottom = 536.0
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="Effects" type="VBoxContainer" parent="Sheet/Sidebar/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 9
+
+[node name="PreviewRow" parent="Sheet/Sidebar/Scroll/Effects" instance=ExtResource("row")]
+layout_mode = 2
+
+[node name="Original" type="Panel" parent="Sheet"]
+offset_left = 318.0
+offset_top = 118.0
+offset_right = 718.0
+offset_bottom = 674.0
+theme_override_styles/panel = SubResource("Sage")
+
+[node name="Group" type="Label" parent="Sheet/Original"]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 376.0
+offset_bottom = 44.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+text = "01  /  原本的音效"
+
+[node name="Title" type="Label" parent="Sheet/Original"]
+offset_left = 24.0
+offset_top = 60.0
+offset_right = 376.0
+offset_bottom = 124.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 28
+text = "選一個聲音，換上你的創意"
+autowrap_mode = 2
+
+[node name="TriggerHeading" type="Label" parent="Sheet/Original"]
+offset_left = 24.0
+offset_top = 144.0
+offset_right = 376.0
+offset_bottom = 168.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+text = "什麼時候會聽到？"
+
+[node name="Trigger" type="Label" parent="Sheet/Original"]
+offset_left = 24.0
+offset_top = 179.0
+offset_right = 376.0
+offset_bottom = 257.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 20
+text = "這裡會顯示所選音效的觸發條件。"
+autowrap_mode = 2
+
+[node name="IdeaHeading" type="Label" parent="Sheet/Original"]
+offset_left = 24.0
+offset_top = 277.0
+offset_right = 376.0
+offset_bottom = 301.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+text = "錄音小靈感"
+
+[node name="Idea" type="Label" parent="Sheet/Original"]
+offset_left = 24.0
+offset_top = 312.0
+offset_right = 376.0
+offset_bottom = 383.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 19
+text = "叮一聲、咕嚕咕嚕，或用自己的聲音跟街坊打招呼。"
+autowrap_mode = 2
+
+[node name="SavedStatus" type="Label" parent="Sheet/Original"]
+offset_left = 24.0
+offset_top = 392.0
+offset_right = 376.0
+offset_bottom = 418.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+text = "目前使用：預設音效"
+
+[node name="PlayOriginal" type="Button" parent="Sheet/Original"]
+offset_left = 24.0
+offset_top = 430.0
+offset_right = 376.0
+offset_bottom = 478.0
+mouse_default_cursor_shape = 2
+text = "試聽原本音效"
+
+[node name="PlaySaved" type="Button" parent="Sheet/Original"]
+offset_left = 24.0
+offset_top = 490.0
+offset_right = 216.0
+offset_bottom = 534.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 18
+text = "試聽已存錄音"
+disabled = true
+
+[node name="Restore" type="Button" parent="Sheet/Original"]
+offset_left = 228.0
+offset_top = 490.0
+offset_right = 376.0
+offset_bottom = 534.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 18
+text = "還原預設"
+disabled = true
+tooltip_text = "刪除此音效的已存錄音，重新使用原本的音效。"
+
+[node name="Recorder" type="Panel" parent="Sheet"]
+offset_left = 736.0
+offset_top = 118.0
+offset_right = 1248.0
+offset_bottom = 674.0
+theme_override_styles/panel = SubResource("Paper")
+
+[node name="Heading" type="Label" parent="Sheet/Recorder"]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 488.0
+offset_bottom = 44.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+text = "02  /  錄下自己的聲音"
+
+[node name="Idle" type="Control" parent="Sheet/Recorder"]
+offset_left = 24.0
+offset_top = 62.0
+offset_right = 488.0
+offset_bottom = 452.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Sheet/Recorder/Idle"]
+offset_right = 464.0
+offset_bottom = 42.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 28
+text = "準備好你的麥克風"
+
+[node name="Description" type="Label" parent="Sheet/Recorder/Idle"]
+offset_top = 62.0
+offset_right = 464.0
+offset_bottom = 120.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 19
+text = "接好麥克風並選擇輸入裝置，\n按「開始錄音」後發出你的創意音效。"
+autowrap_mode = 2
+
+[node name="Devices" type="OptionButton" parent="Sheet/Recorder/Idle"]
+offset_top = 142.0
+offset_right = 464.0
+offset_bottom = 192.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.2, 0.31, 0.28, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("Device")
+text = "Default"
+fit_to_longest_item = false
+item_count = 1
+popup/item_0/text = "Default"
+selected = 0
+tooltip_text = "選擇麥克風輸入裝置。"
+
+[node name="Refresh" type="Button" parent="Sheet/Recorder/Idle"]
+offset_top = 205.0
+offset_right = 150.0
+offset_bottom = 245.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 17
+text = "重新整理裝置"
+
+[node name="Help" type="Label" parent="Sheet/Recorder/Idle"]
+offset_top = 264.0
+offset_right = 464.0
+offset_bottom = 320.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 17
+text = "最長 8 秒。開頭的靜音會自動修剪，\n試聽滿意後才會儲存。"
+autowrap_mode = 2
+
+[node name="Record" type="Button" parent="Sheet/Recorder/Idle"]
+offset_top = 336.0
+offset_right = 464.0
+offset_bottom = 388.0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("RecordButton")
+text = "開始錄音"
+
+[node name="Recording" type="Control" parent="Sheet/Recorder"]
+visible = false
+offset_left = 24.0
+offset_top = 62.0
+offset_right = 488.0
+offset_bottom = 452.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Sheet/Recorder/Recording"]
+offset_right = 464.0
+offset_bottom = 42.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 28
+text = "正在錄音…"
+
+[node name="Description" type="Label" parent="Sheet/Recorder/Recording"]
+offset_top = 62.0
+offset_right = 464.0
+offset_bottom = 120.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 19
+text = "讓你的聲音為小店加點個性。\n完成後按停止；8 秒後會自動停止。"
+autowrap_mode = 2
+
+[node name="Elapsed" type="Label" parent="Sheet/Recorder/Recording"]
+offset_top = 145.0
+offset_right = 464.0
+offset_bottom = 185.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.7, 0.31, 0.23, 1)
+theme_override_font_sizes/font_size = 27
+text = "REC  0.0 / 8.0 秒"
+
+[node name="LevelHeading" type="Label" parent="Sheet/Recorder/Recording"]
+offset_top = 207.0
+offset_right = 464.0
+offset_bottom = 233.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+text = "麥克風音量"
+
+[node name="Level" type="ProgressBar" parent="Sheet/Recorder/Recording"]
+offset_top = 242.0
+offset_right = 464.0
+offset_bottom = 264.0
+mouse_filter = 2
+max_value = 1.0
+show_percentage = false
+
+[node name="Duration" type="ProgressBar" parent="Sheet/Recorder/Recording"]
+offset_top = 284.0
+offset_right = 464.0
+offset_bottom = 293.0
+mouse_filter = 2
+max_value = 8.0
+show_percentage = false
+
+[node name="Stop" type="Button" parent="Sheet/Recorder/Recording"]
+offset_top = 336.0
+offset_right = 464.0
+offset_bottom = 388.0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("RecordButton")
+text = "停止錄音"
+
+[node name="Review" type="Control" parent="Sheet/Recorder"]
+visible = false
+offset_left = 24.0
+offset_top = 62.0
+offset_right = 488.0
+offset_bottom = 452.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Sheet/Recorder/Review"]
+offset_right = 464.0
+offset_bottom = 42.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 28
+text = "錄好了，先聽聽看"
+
+[node name="Info" type="Label" parent="Sheet/Recorder/Review"]
+offset_top = 62.0
+offset_right = 464.0
+offset_bottom = 157.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 20
+text = "音效長度：1.00 秒\n已移除開頭 0.25 秒的靜音。\n頭尾已柔化，播放更自然。"
+autowrap_mode = 2
+
+[node name="Preview" type="Button" parent="Sheet/Recorder/Review"]
+offset_top = 182.0
+offset_right = 464.0
+offset_bottom = 234.0
+mouse_default_cursor_shape = 2
+text = "試聽這次錄音"
+
+[node name="Notice" type="Label" parent="Sheet/Recorder/Review"]
+offset_top = 258.0
+offset_right = 464.0
+offset_bottom = 316.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 17
+text = "按「使用這個音效」才會替換已存音效。\n換選音效或離開會捨棄這次錄音。"
+autowrap_mode = 2
+
+[node name="Retake" type="Button" parent="Sheet/Recorder/Review"]
+offset_top = 336.0
+offset_right = 166.0
+offset_bottom = 388.0
+mouse_default_cursor_shape = 2
+text = "重新錄音"
+
+[node name="Use" type="Button" parent="Sheet/Recorder/Review"]
+offset_left = 180.0
+offset_top = 336.0
+offset_right = 464.0
+offset_bottom = 388.0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("RecordButton")
+text = "使用這個音效"
+
+[node name="Saved" type="Control" parent="Sheet/Recorder"]
+visible = false
+offset_left = 24.0
+offset_top = 62.0
+offset_right = 488.0
+offset_bottom = 452.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Sheet/Recorder/Saved"]
+offset_right = 464.0
+offset_bottom = 42.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 28
+text = "音效已儲存！"
+
+[node name="Effect" type="Label" parent="Sheet/Recorder/Saved"]
+offset_top = 62.0
+offset_right = 464.0
+offset_bottom = 142.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 20
+text = "這個音效已換成你的錄音。\n下次遊玩時就會聽到！"
+autowrap_mode = 2
+
+[node name="Question" type="Label" parent="Sheet/Recorder/Saved"]
+offset_top = 194.0
+offset_right = 464.0
+offset_bottom = 264.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 25
+text = "要再自訂另一個音效嗎？"
+autowrap_mode = 2
+
+[node name="Yes" type="Button" parent="Sheet/Recorder/Saved"]
+offset_top = 336.0
+offset_right = 225.0
+offset_bottom = 388.0
+mouse_default_cursor_shape = 2
+text = "是 · Yes"
+
+[node name="No" type="Button" parent="Sheet/Recorder/Saved"]
+offset_left = 239.0
+offset_top = 336.0
+offset_right = 464.0
+offset_bottom = 388.0
+mouse_default_cursor_shape = 2
+text = "否 · No"
+
+[node name="Status" type="Label" parent="Sheet/Recorder"]
+offset_left = 24.0
+offset_top = 470.0
+offset_right = 488.0
+offset_bottom = 538.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.65, 0.28, 0.2, 1)
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 2
+
+[node name="Privacy" type="Label" parent="."]
+offset_left = 34.0
+offset_top = 687.0
+offset_right = 1248.0
+offset_bottom = 711.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 15
+text = "麥克風只在錄音時啟用；錄音僅存本機，不會上傳。換選或離開會停止錄音。遊戲靜音時仍可在此試聽。"

@@ -1,0 +1,117 @@
+GAMETOPIA / HOI DONG — CUSTOM SOUND EFFECTS
+=========================================
+
+Player guide
+------------
+Open the game normally (main.tscn / F5). On the shop-selection page, choose
+「自訂音效」 (Customise Sound Effects).
+
+The studio randomly selects one of the game's sounds. Its description explains
+when it plays. Listen to the original, choose another random sound with
+「換一個」 (Pick Another), or select any sound in the left sidebar.
+
+Connect and enable your microphone, choose the input device, and start recording.
+Recording ends when you press Stop or after eight seconds. The game removes
+leading silence and softens the recording's edges. A silent or unusably short
+take is rejected so that it cannot replace an existing sound.
+
+Preview the trimmed take, record it again if needed, then choose Use/Save.
+The saved sound is used immediately by the corresponding gameplay event.
+The completion page asks whether to customise another effect: Yes selects a new
+sound, and No returns to the game's shop-selection page.
+
+You can listen to the factory original and your saved version separately.
+Restore Original removes the selected custom replacement. Other recordings
+are unaffected. Leaving the studio, pressing Escape, or switching away from
+the application stops microphone capture. Audio is recorded locally only.
+
+The existing map sound button mutes gameplay sound. Explicit studio previews
+remain available so you can audition a recording while gameplay is muted.
+
+Saved recordings and project sharing
+-----------------------------------
+Recordings are stored in this project's Godot user-data directory:
+    user://custom_sfx_gametopia/<event_id>.wav
+
+Open that folder through Godot's Project > Open User Data Folder command.
+Recordings are separate from hoidong_progress_v1.json, the existing game save.
+Customising a sound does not change money, day number, upgrades, or difficulty.
+The old test-2 project's recordings are not imported or overwritten.
+
+Sharing the project source does not include a player's local recordings. To
+share recordings deliberately, copy the desired WAV files into the same
+custom_sfx_gametopia folder on the teammate's computer after they run the game.
+The teammate can also create their own recordings from the studio.
+
+Sound list — 21 actual game events
+---------------------------------
+ 1. ui_click          — Choosing a menu button or confirmed menu action.
+ 2. pick_up           — Beginning a valid item drag.
+ 3. drop_valid        — A production station, customer, or bin accepts a drop.
+ 4. drop_return       — An invalid or rejected drop returns to its source.
+ 5. tea_pour          — A kettle pours into an empty bowl; with automatic tea,
+                       each delivered or discarded bowl starts its refill.
+ 6. tea_ready         — Manual or automatic tea pouring finishes.
+ 7. egg_cook          — A batch of raw eggs starts cooking.
+ 8. egg_ready         — The egg batch is cooked and ready to transfer.
+ 9. egg_transfer      — Cooked eggs start moving to the warming pot.
+10. fish_cook         — Raw fish balls are accepted into a cooking lane.
+11. fish_spear        — A cooked fish ball is reserved for the skewer.
+12. skewer_ready      — A finished or partial skewer returns to its pickup spot.
+13. phone_restock     — A phone call successfully starts replenishment.
+14. restock_complete  — Replenishment finishes and the supply is restored.
+15. discard           — An accepted item is discarded in the bin.
+16. order_paid        — A complete customer order pays out.
+17. customer_leave    — A customer runs out of patience and leaves.
+18. customer_arrive   — A new customer arrives and begins approaching the counter.
+19. day_closed        — The business timer ends and the shop closes.
+20. shop_open         — A new normal or test business session starts.
+21. upgrade_buy       — An upgrade or new food is successfully purchased.
+
+Implementation notes
+--------------------
+The new page is scenes/pages/sound_studio.tscn. Its repeated sidebar row is
+scenes/components/sound_effect_row.tscn. Both are native Godot scenes so the
+layout can be previewed and edited in the Inspector. Equipment, food artwork,
+shop layout, economy settings, upgrades, and existing progress are preserved.
+
+scripts/sound_studio.gd controls selection, recording, review, save and return.
+scripts/sound_bank.gd owns the event catalog, original sounds, microphone
+capture, silence trimming, local WAV persistence and playback. Original sounds
+are generated locally, so this feature has no online service or paid dependency.
+scripts/main.gd routes the existing gameplay event IDs through the shared bank.
+There is no second production system or imported test-2 gameplay.
+
+Only begin capture after the player explicitly presses Record. The microphone
+bus is not audible through the speakers. Previous playback stops before
+recording; leaving recording stops capture and releases its input resources.
+Overlapping gameplay effects use multiple audio players rather than cutting
+one another off. Invalid drops continue to use the real drop_return event.
+
+Microphone troubleshooting
+--------------------------
+If no input is available, connect a microphone and refresh the device list.
+Check Windows Settings > Privacy & security > Microphone and allow microphone
+access for desktop apps. Select the correct input device in Windows and in the
+studio. Speak close enough to produce a clear level meter response. Tests use
+synthetic frames; real microphone permission and hardware require a manual try.
+
+Verification commands (run from the project directory)
+------------------------------------------------------
+Godot --headless --path . --script res://tests/test_sound_bank.gd
+Godot --headless --path . --script res://tests/test_sound_integration.gd
+Godot --path . --script res://tests/capture_sound_studio.gd
+
+The integration harness injects a fake microphone and a unique temporary sound
+folder plus game-save fixture. It never changes a real player's progress or
+recordings. Native captures are written to tests/artifacts/sound_*.png.
+
+Validation for this change: 275 audio-backend checks and 331 integration checks
+passed. The integration suite also passed with native rendering at 1280x720 and
+960x540. Existing service, upgrade-model, and main UI gameplay tests passed.
+Godot MCP project diagnostics reported zero errors and zero warnings.
+
+One older test, tests/test_upgrade_ui.gd line 10, still expects the bowl supply
+at (312, 353). The existing committed shop scene places it at (970, 192.00003).
+That assertion predates this change; the shop scene has not been repositioned.
+The new integration suite checks preservation of the actual authored transforms.

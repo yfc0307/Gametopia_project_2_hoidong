@@ -1,0 +1,51 @@
+[gd_scene format=3]
+
+[sub_resource type="StyleBoxFlat" id="Normal"]
+bg_color = Color(0.94, 0.94, 0.86, 1)
+content_margin_left = 12.0
+content_margin_top = 9.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+
+[sub_resource type="StyleBoxFlat" id="Selected"]
+bg_color = Color(0.32, 0.47, 0.42, 1)
+content_margin_left = 12.0
+content_margin_top = 9.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+
+[node name="SoundEffectRow" type="VBoxContainer"]
+custom_minimum_size = Vector2(222, 44)
+offset_right = 222.0
+offset_bottom = 76.0
+theme_override_constants/separation = 5
+
+[node name="Group" type="Label" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+text = "店舖"
+
+[node name="Choice" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.2, 0.31, 0.28, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.98, 0.9, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.98, 0.9, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("Normal")
+theme_override_styles/hover = SubResource("Normal")
+theme_override_styles/pressed = SubResource("Selected")
+toggle_mode = true
+text = "顧客進店"
+alignment = 0
+autowrap_mode = 2
